@@ -46,11 +46,13 @@
 <body>
 
 
-<h1>Temporary Landing Page</h1>
+<h1>Hello world</h1>
 
 <p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
 
 <p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
+<h1>Test edit...</h1>
+<p>Testing making changes to some files....</p>
 
 </body>
 </html>
