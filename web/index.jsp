@@ -4,55 +4,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temporary Landing Page</title>
-    <style type="text/css">
-        body {
-            width: 600px;
-            margin: 6em auto;
-            color: #444;
-            text-align: justify;
-            font-family: sans-serif;
-            font-size: 14pt;
-            line-height: 150%;
-        }
-
-        h1, h2 {
-            text-decoration: lightgrey underline;
-            color: #222;
-        }
-
-        h2 {
-            margin-top: 2em;
-        }
-
-        code {
-            background-color: rgba(255, 167, 182, 0.41);
-            color: darkred;
-            font-family: monospace;
-            border: 1px solid darkred;
-            padding: 1px 5px;
-        }
-
-        a:visited, a:active, a {
-            color: dodgerblue;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>The Pokemon Blog</title>
+    <link href ="Style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<div id="header">
+    <h1>The Pokemon Blog</h1>
+</div>
 
-<h1>Hello world</h1>
+<div id="nav">
+    <a>Example link</a>
+    <a>Example link</a>
+    <a>Example link</a>
+</div>
 
-<p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
+<h1 id="title">Welcome to the Pokemon Blog!</h1>
 
-<p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
-<h1>Test edit...</h1>
-<p>Testing making changes to some files....</p>
+<div id="content-wrapper">
+    <p>The Pokemon Blog is a blogging site especially for Pokemon fans! Anyone can view our amazing Pokemon bloggers, and you can create a free account and start blogging yourself.
+    </p>
+    <p>Another paragraph.
+    </p>
+    <a href="./WEB-INF/hello-world.jsp">Login</a>
+    <br>
+    <br>
+    <a href="./WEB-INF/hello-world.jsp">Create Account</a>
+</div>
 
 </body>
 </html>
