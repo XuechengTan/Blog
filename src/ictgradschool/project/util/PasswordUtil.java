@@ -23,7 +23,6 @@ public class PasswordUtil {
     private static final int DEFAULT_ITERATIONS = 100_000;
     private static final int KEY_LENGTH = 512;
     private static final int DEFAULT_SALT_LENGTH = 32;
-    private static final String ARBITRARY = "Hello hello test";
 
     /**
      * static utility class
