@@ -51,6 +51,8 @@
 <p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
 
 <p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
+<h1>Test edit...</h1>
+<p>Testing making changes to some files....</p>
 
 </body>
 </html>
