@@ -46,7 +46,7 @@
 <body>
 
 
-<h1>Temporary Landing Page</h1>
+<h1>Hello world</h1>
 
 <p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
 
