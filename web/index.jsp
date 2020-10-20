@@ -7,6 +7,7 @@
     <title>The Pokemon Blog</title>
     <link href ="Style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+    <script src="ReplaceLoginButtons.js"></script>
 </head>
 <body>
 
