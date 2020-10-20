@@ -12,12 +12,10 @@
 
 <div id="header">
     <h1>The Pokemon Blog</h1>
-</div>
-
-<div id="nav">
-    <a>Example link</a>
-    <a>Example link</a>
-    <a>Example link</a>
+    <div id="nav">
+        <a href="UserSignup.html">Create Account</a>
+        <a>Login</a>
+    </div>
 </div>
 
 <h1 id="title">Welcome to the Pokemon Blog!</h1>
@@ -30,7 +28,7 @@
     <a href="./WEB-INF/hello-world.jsp">Login</a>
     <br>
     <br>
-    <a href="./WEB-INF/hello-world.jsp">Create Account</a>
+    <a href="UserSignup.html">Create Account</a>
 </div>
 
 </body>
