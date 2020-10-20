@@ -40,6 +40,8 @@ public class ArticleServlet extends HttpServlet {
 
             if (success) {
                 System.out.println("article added");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/after-submit-article.jsp");
+                dispatcher.forward(req, resp);
             } else {
                 System.out.println("article added failed");
             }
