@@ -1,0 +1,22 @@
+<svg width="482" height="773" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="484" height="775" id="canvas_background" fill="none"/>
+  <g id="canvasGrid" width="100%" height="100%" x="0" y="0" overflow="visible" display="none">
+   <rect id="svg_2" width="100%" height="100%" x="0" y="0" stroke-width="0" fill="url(#gridpattern)"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="576.645264" x2="25.000009" y1="243.645271" x1="200.000001" fill-opacity="null" stroke-opacity="null" stroke-width="20" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="569.645271" x2="334.000001" y1="571.645271" x1="33.000001" fill-opacity="null" stroke-opacity="null" stroke-width="20" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="250.645271" x2="456.000001" y1="576.645271" x1="324.000001" fill-opacity="null" stroke-opacity="null" stroke-width="20" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="255.645271" x2="464.000001" y1="251.645271" x1="196.000001" fill-opacity="null" stroke-opacity="null" stroke-width="20" stroke="#000" fill="none"/>
+  <line stroke="#000" transform="rotate(-8.779853820800781 347.0000000000002,364.6453857421877) " stroke-linecap="null" stroke-linejoin="null" id="svg_17" y2="271.320388" x2="402.207358" y1="457.970394" x1="291.792639" fill-opacity="null" stroke-opacity="null" stroke-width="99" fill="none"/>
+  <line stroke="#000" transform="rotate(-8.779853820800781 269.99999999999943,369.6453857421875) " stroke-linecap="null" stroke-linejoin="null" id="svg_19" y2="276.320388" x2="325.207358" y1="462.970394" x1="214.792639" fill-opacity="null" stroke-opacity="null" stroke-width="99" fill="none"/>
+  <line stroke="#000" transform="rotate(-8.779853820800781 192.49999999999932,364.64538574218733) " stroke-linecap="null" stroke-linejoin="null" id="svg_20" y2="273.831185" x2="250.861072" y1="455.459595" x1="134.138928" fill-opacity="null" stroke-opacity="null" stroke-width="99" fill="none"/>
+  <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_21" y2="272.645273" x2="441.000018" y1="274.645273" x1="219.999993" fill-opacity="null" stroke-opacity="null" stroke-width="25" fill="none"/>
+ </g>
+</svg>
