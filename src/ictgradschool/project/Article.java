@@ -28,6 +28,12 @@ public class Article implements Serializable {
         this.authorID = authorID;
     }
 
+    public Article(String title, String content, Integer authorID) {
+        this.title = title;
+        this.content = content;
+        this.authorID = authorID;
+    }
+
     public Article() {
     }
 
@@ -77,5 +83,17 @@ public class Article implements Serializable {
 
     public void setAuthorID(Integer authorID) {
         this.authorID = authorID;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + articleId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", date=" + date +
+                ", imageFile='" + imageFile + '\'' +
+                ", authorID=" + authorID +
+                '}';
     }
 }

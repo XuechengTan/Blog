@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ArticleCreateSector</title>
+    <link rel="stylesheet" type="text/css" href="Style.css">
+</head>
+<body>
+<div id="header">
+    <h1>Article Create Part</h1>
+</div>
+<div id="content-wrapper">
+    <form id="articleForm" action="./articleservlet" method="get">
+        <label><strong>Your article title</strong></label><br>
+        <input type="text" name="title" value=""><br>
+        <label><strong>Please write your article</strong></label><br>
+        <textarea id="article-text" name="article-text-area" rows="15" cols="100" enter your artilce here></textarea>
+        <input type="hidden" name="currentDate" value="">
+        <input type="hidden" name="userID" value="1">
+        <input type="hidden" name="imageFileName" value="">
+        <input type="button" id="submitButton" value="Submit your article Button">
+        <input type="submit" value="Submit your article">
+    </form>
+</div>
+</body>
+<script>
+
+</script>
+</html>
