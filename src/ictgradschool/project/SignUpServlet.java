@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,8 +66,8 @@ public class SignUpServlet extends HttpServlet {
                     switch (fi.getFieldName()) {
                         case "userName":
                         newUser.setUserName(fi.getString());
-                            System.out.println("username");
                         break;
+
                         case"rePassword":
                         String password = fi.getString();
 
@@ -79,25 +78,24 @@ public class SignUpServlet extends HttpServlet {
                         newUser.setSaltBase64(salt);
                         String hash = PasswordUtil.base64Encode(hashGenerated);
                         newUser.setPasswordHashBase64(hash);
-                            System.out.println("password"+ fi.getString());
                         break;
+
                         case "firstName":
                         newUser.setfName(fi.getString());
-                            System.out.println(fi.getString());
                         break;
+
                         case "lastName":
                         newUser.setlName(fi.getString());
-                            System.out.println(fi.getString());
                         break;
+
                         case "dateOfBirth":
                             System.out.println(fi.getString());
                             Date dob = new SimpleDateFormat("yyyy-MM-dd").parse(fi.getString());
                             newUser.setDob(dob);
-                            System.out.println(fi.getString());
                             break;
+
                         case "description":
                         newUser.setDescription(fi.getString());
-                            System.out.println(fi.getString());
                         break;
 
                         case "avatar":
@@ -129,34 +127,7 @@ public class SignUpServlet extends HttpServlet {
         resp.sendRedirect("./index.jsp");
     }
 
-    }
-//    String username = req.getParameter("userName");
-//        newUser.setUserName(username);
-//                String password = req.getParameter("rePassword");
-//
-//                byte[] saltGenerated = PasswordUtil.getNextSalt();
-//                byte[] hashGenerated = PasswordUtil.insecureHash(password);
-//
-//                String salt = PasswordUtil.base64Encode(saltGenerated);
-//                newUser.setSaltBase64(salt);
-//                String hash = PasswordUtil.base64Encode(hashGenerated);
-//                newUser.setPasswordHashBase64(hash);
-//
-//                String fName = req.getParameter("firstName");
-//                newUser.setfName(fName);
-//                String lName = req.getParameter("lastName");
-//                newUser.setlName(lName);
-//
-//                Date dob = null;
-//                try {
-//                dob = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("dateOfBirth"));
-//                } catch (ParseException e) {
-//                e.printStackTrace();
-//                }
-//                newUser.setDob(dob);
-//
-//                String description = req.getParameter("description");
-//                newUser.setDescription(description);
+}
 
 
 
