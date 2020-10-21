@@ -48,8 +48,9 @@ public class SignUpServlet extends HttpServlet {
         }
 
         String description = req.getParameter("description");
+        String imageFile = req.getParameter("avatar");
 
-        User newUser = new User(username, fName, lName, hash, salt, dob, description, null);
+        User newUser = new User(username, fName, lName, hash, salt, dob, description, imageFile);
         req.getSession().setAttribute("newUser", newUser);
 
 
