@@ -53,7 +53,7 @@
 
 <div id="content-wrapper">
 
-    <form action="./signUp" method="post" onsubmit="return testPassword()" id="passwordForm">
+    <form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="return testPassword()" id="passwordForm">
         <label>Choose username:</label><br>
         <input type="text" name="userName" id="userName" value="" onblur="testUserName()"><br><br>
         <label>Choose password:</label><br>

@@ -18,21 +18,21 @@ public class UsernameServlet extends HttpServlet {
 
     @Override
     protected void doGet (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("here");
+
         String username = req.getParameter("username");
-        System.out.println(username);
+
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             List<User> userList = UserDao.getAllUserName(conn);
+
             String content= "fail";
             for(User user: userList){
                 System.out.println(user.getUserName());
                 if(user.getUserName().equals(username)){
                     content = "fail";
-                    System.out.println(content);
+                    break;
                 }
                 else {
                     content = "pass";
-                    System.out.println(content);
                 }
             }
 
