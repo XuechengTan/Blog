@@ -39,6 +39,10 @@ public class User implements Serializable {
         this.imagePath = imagePath;
     }
 
+    public User(String userName) {
+        this.userName = userName;
+    }
+
     public User() {
     }
 
