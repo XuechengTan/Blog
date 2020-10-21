@@ -202,25 +202,25 @@
                     <span class="btn has-submenu"><p><strong>Font Size</strong><p>
     <div class="submenu">
                     <span class="btn" data-action="fontSize" data-name="1" title="Size 1">
-                       <img src="images/editor/size1.SVG">
+                       <img src="images/editor/size1.SVG" alt="Size 1">
             </span>
                             <span class="btn" data-action="fontSize" data-name="2" title="Size 2">
-          <img src="images/editor/size2.SVG">
+          <img src="images/editor/size2.SVG" alt="Size 2">
             </span>
                             <span class="btn" data-action="fontSize" data-name="3" title="Size 3">
-         <img src="images/editor/size3.SVG">
+         <img src="images/editor/size3.SVG" alt="Size 3">
             </span>
                             <span class="btn" data-action="fontSize" data-name="4" title="Size 4">
-          <img src="images/editor/size4.SVG">
+          <img src="images/editor/size4.SVG" alt="Size 4">
             </span>
                             <span class="btn" data-action="fontSize" data-name="5" title="Size 5">
-          <img src="images/editor/size5.SVG">
+          <img src="images/editor/size5.SVG" alt="Size 5">
             </span>
                             <span class="btn" data-action="fontSize" data-name="6" title="Size 6">
-          <img src="images/editor/size6.SVG">
+          <img src="images/editor/size6.SVG" alt="Size 6">
             </span>
                             <span class="btn" data-action="fontSize" data-name="7" title="Size 7">
-          <img src="images/editor/size7.SVG">
+          <img src="images/editor/size7.SVG" alt="Size 7">
             </span>
 
 </div>
@@ -275,7 +275,6 @@
                         document.execCommand(action, false, 1);
                         break;
                     case('2'):
-
                         document.execCommand(action, false, 2);
                         break;
                     case('3'):
@@ -304,8 +303,7 @@
     const content = document.getElementById('article-text');
     const view = document.getElementsByClassName('view')[0];
     subBut.addEventListener('click', function () {
-        submitArticles.innerHTML = '';
-        submitArticles.innerHTML += view.innerHTML;
+
         content.value = view.innerHTML;
 
         document.getElementById('articleForm').submit();
