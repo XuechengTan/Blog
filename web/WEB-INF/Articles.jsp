@@ -1,10 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Playtech
+  Date: 21/10/2020
+  Time: 8:26 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>The Pokemon Blog</title>
     <link href ="Style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
     <script src="ReplaceLoginButtons.js"></script>
@@ -19,20 +23,17 @@
     </div>
 </div>
 
-<h1 id="title">Welcome to the Pokemon Blog!</h1>
+<h1 id="title">Articles</h1>
 
 <div id="content-wrapper">
-    <p>The Pokemon Blog is a blogging site especially for Pokemon fans! Anyone can view our amazing Pokemon bloggers, and you can create a free account and start blogging yourself.
-    </p>
-    <p>Another paragraph.
-    </p>
-    <a href="Login.html">Login</a>
-    <br>
-    <br>
-    <a href="UserSignup.html">Create Account</a>
 
-    <jsp:include page="/articleaccessservlet"></jsp:include>
+    <c:forEach var="article" items="${articles}">
+        <h2><a href="/singlearticleservlet?title=${article.title}">${article.title}</a> by ${article.authorID}</h2><br>
+    </c:forEach>
+
 </div>
+
+
 
 </body>
 </html>
