@@ -57,22 +57,19 @@ public class ArticleDAO {
     }
     public static boolean editArticle(Article article, Connection conn) throws SQLException {
 
-        // We can use prepared statements for database updates as well as queries.
+        
         try (PreparedStatement stmt = conn.prepareStatement(
                 "UPDATE pb_article SET title = ?, content = ? WHERE articleId = ?")) {
 
-            // We set the prepared statement's variables exactly the same - replacing the ?'s with their actual values
-            // obtained from the Lecturer object.
+           
             stmt.setString(1, article.getTitle());
             stmt.setString(2, article.getContent());
             stmt.setInt(3, article.getArticleId());
 
-            // The executeUpdate() method will run an SQL INSERT, UPDATE, or DELETE. It will return an int value
-            // specifying how many rows are affected by the statement. In this case, this will be either 1 (if the update
-            // was successful) or 0 (if it wasn't, for example because a lecturer with the given staff_no doesn't exist).
+          
             int rowsAffected = stmt.executeUpdate();
 
-            // If rowsAffected is 1, it means the update was successful and we'll return true. Otherwise we return false.
+           
             return (rowsAffected == 1);
 
         }
