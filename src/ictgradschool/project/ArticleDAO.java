@@ -1,11 +1,96 @@
 package ictgradschool.project;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //just basic function, need to be modified in the future.
 public class ArticleDAO {
 
+    public static List<Article> getArticleByAuthorId(int id, Connection conn) throws SQLException {
+        List<Article> articles = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_article a WHERE a.authorID=?")) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Article article = createArticleFromResultSet(rs);
+                    articles.add(article);
+                }
 
+            }
+        }
+        if (articles.size() == 0) {
+            return null;
+        }
+        return articles;
+    }
+    public static Article getArticleByArticleId(int articleId, Connection conn) throws SQLException {
+        Article article=null;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_article a WHERE a.articleId=?")) {
+            stmt.setInt(1, articleId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                     article = createArticleFromResultSet(rs);
+
+                }
+
+            }
+        }
+        if (article == null) {
+            return null;
+        }
+        return article;
+    }
+    private static Article createArticleFromResultSet(ResultSet rs) throws SQLException {
+
+        Article article = new Article(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getDate(4),
+                rs.getInt(5)
+
+        );
+
+        return article;
+
+    }
+    public static boolean editArticle(Article article, Connection conn) throws SQLException {
+
+        
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "UPDATE pb_article SET title = ?, content = ? WHERE articleId = ?")) {
+
+           
+            stmt.setString(1, article.getTitle());
+            stmt.setString(2, article.getContent());
+            stmt.setInt(3, article.getArticleId());
+
+          
+            int rowsAffected = stmt.executeUpdate();
+
+           
+            return (rowsAffected == 1);
+
+        }
+
+    }
+    public static boolean deleteArticle(int articleId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_article WHERE articleId = ?")) {
+
+            stmt.setInt(1, articleId);
+
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
     public static boolean insertArticle(Article article, Connection conn) throws SQLException {
 
 
@@ -43,7 +128,7 @@ public class ArticleDAO {
 
             stmt.setString(1, article.getTitle());
             stmt.setString(2, article.getContent());
-            stmt.setInt(3,article.getAuthorID());
+            stmt.setInt(3, article.getAuthorID());
 
             int rowsAffected = stmt.executeUpdate();
 
