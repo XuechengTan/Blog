@@ -26,10 +26,8 @@ public class ArticleServlet extends HttpServlet {
             String title = req.getParameter("title");
             String content = req.getParameter("article-text-area");
 
-            String imgFileName=req.getParameter("imageFileName");
             int authorId=Integer.parseInt(req.getParameter("userID"));
 
-            //Article article = new Article(title, content, currentDate, imgFileName, authorId);
             Article article = new Article(title, content, authorId);
 
 

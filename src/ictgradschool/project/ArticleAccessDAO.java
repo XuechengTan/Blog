@@ -33,8 +33,7 @@ public class ArticleAccessDAO {
                 rs.getString(2),
                 rs.getString(3),
                 rs.getDate(4),
-                rs.getString(5),
-                rs.getInt(6)
+                rs.getInt(5)
         );
         return article;
     }
