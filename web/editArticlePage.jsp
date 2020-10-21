@@ -87,6 +87,36 @@
         #article-text {
             display: none;
         }
+
+        .editor .toolbar .line .box .btn.has-submenu {
+
+
+        }
+
+        .editor .toolbar .line .box .btn.has-submenu .submenu {
+            display: none;
+            position: absolute;
+            top: 36px;
+            left: -1px;
+            z-index: 10;
+            background-color: #fff;
+            border: 1px solid #b5b5b5;
+            border-top: none;
+        }
+
+        .editor .toolbar .line .box .btn.has-submenu .submenu .btn {
+            width: 80px;
+
+        }
+
+        .editor .toolbar .line .box .btn.has-submenu .submenu .btn img {
+            width: 60px;
+            height: 20px;
+        }
+
+        .editor .toolbar .line .box .btn.has-submenu:hover .submenu {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -134,6 +164,69 @@
             </span>
                 </div>
 
+                <div class="box">
+                    <span class="btn has-submenu"><p><strong>Back Color</strong><p>
+    <div class="submenu">
+                    <span class="btn" data-action="backColor" data-name="red" title="Red">
+          <img src="./images/editor/red.gif">
+            </span>
+      <span class="btn" data-action="backColor" data-name="orange" title="Orange">
+          <img src="images/editor/orange.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="yellow" title="Yellow">
+          <img src="images/editor/yellow.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="blue" title="Blue">
+          <img src="images/editor/blue.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="green" title="Green">
+          <img src="images/editor/green.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="cyan" title="Cyan">
+          <img src="images/editor/cyan.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="purple" title="Purple">
+          <img src="images/editor/purple.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="black" title="Black">
+          <img src="images/editor/black.gif">
+            </span>
+                        <span class="btn" data-action="backColor" data-name="white" title="White">
+          <img src="images/editor/white.gif">
+            </span>
+</div>
+</span>
+                </div>
+
+                <div class="box">
+                    <span class="btn has-submenu"><p><strong>Font Size</strong><p>
+    <div class="submenu">
+                    <span class="btn" data-action="fontSize" data-name="1" title="Size 1">
+                       <img src="images/editor/size1.SVG" alt="Size 1">
+            </span>
+                            <span class="btn" data-action="fontSize" data-name="2" title="Size 2">
+          <img src="images/editor/size2.SVG" alt="Size 2">
+            </span>
+                            <span class="btn" data-action="fontSize" data-name="3" title="Size 3">
+         <img src="images/editor/size3.SVG" alt="Size 3">
+            </span>
+                            <span class="btn" data-action="fontSize" data-name="4" title="Size 4">
+          <img src="images/editor/size4.SVG" alt="Size 4">
+            </span>
+                            <span class="btn" data-action="fontSize" data-name="5" title="Size 5">
+          <img src="images/editor/size5.SVG" alt="Size 5">
+            </span>
+                            <span class="btn" data-action="fontSize" data-name="6" title="Size 6">
+          <img src="images/editor/size6.SVG" alt="Size 6">
+            </span>
+                            <span class="btn" data-action="fontSize" data-name="7" title="Size 7">
+          <img src="images/editor/size7.SVG" alt="Size 7">
+            </span>
+
+</div>
+</span>
+                </div>
+
             </div>
 
 
@@ -165,23 +258,53 @@
 <script>
     const editor = document.getElementsByClassName('editor')[0];
     const toolbar = editor.getElementsByClassName('toolbar')[0];
-    const buttons = toolbar.querySelectorAll('.btn');
+    const buttons = toolbar.querySelectorAll('.btn:not(.has-submenu)');
     for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i];
-
         button.addEventListener('click', function (e) {
             let action = this.dataset.action;
-            document.execCommand(action, false);
+
+            if (action === 'backColor') {
+                let name = this.dataset.name;
+
+                document.execCommand(action, false, name);
+            } else if (action === 'fontSize') {
+                let name = this.dataset.name;
+                switch (name) {
+                    case("1"):
+                        document.execCommand(action, false, 1);
+                        break;
+                    case('2'):
+                        document.execCommand(action, false, 2);
+                        break;
+                    case('3'):
+                        document.execCommand(action, false, 3);
+                        break;
+                    case('4'):
+                        document.execCommand(action, false, 4);
+                        break;
+                    case('5'):
+                        document.execCommand(action, false, 5);
+                        break;
+                    case('6'):
+                        document.execCommand(action, false, 6);
+                        break;
+                    case('7'):
+                        document.execCommand(action, false, 7);
+                        break;
+                }
+            } else {
+                document.execCommand(action, false);
+            }
         });
     }
-    const submitArticles=document.getElementsByClassName('submittedArticle')[0];
+    const submitArticles = document.getElementsByClassName('submittedArticle')[0];
     const subBut = document.getElementsByClassName('submitBtn')[0];
     const content = document.getElementById('article-text');
-    const view=document.getElementsByClassName('view')[0];
+    const view = document.getElementsByClassName('view')[0];
     subBut.addEventListener('click', function () {
-        /*submitArticles.innerHTML='';
-        submitArticles.innerHTML+=view.innerHTML;*/
-        content.value=view.innerHTML;
+
+        content.value = view.innerHTML;
 
         document.getElementById('articleForm').submit();
     })
