@@ -1,3 +1,4 @@
+
 package ictgradschool.project;
 
 import java.io.Serializable;
@@ -8,23 +9,20 @@ public class Article implements Serializable {
     private String title;
     private String content;
     private Date date;
-    private String imageFile;
     private Integer authorID;
 
-    public Article(Integer articleId, String title, String content, Date date, String imageFile, Integer authorID) {
+    public Article(Integer articleId, String title, String content, Date date, Integer authorID) {
         this.articleId = articleId;
         this.title = title;
         this.content = content;
         this.date = date;
-        this.imageFile = imageFile;
         this.authorID = authorID;
     }
 
-    public Article(String title, String content, Date date, String imageFile, Integer authorID) {
+    public Article(String title, String content, Date date, Integer authorID) {
         this.title = title;
         this.content = content;
         this.date = date;
-        this.imageFile = imageFile;
         this.authorID = authorID;
     }
 
@@ -69,14 +67,6 @@ public class Article implements Serializable {
         this.date = date;
     }
 
-    public String getImageFile() {
-        return imageFile;
-    }
-
-    public void setImageFile(String imageFile) {
-        this.imageFile = imageFile;
-    }
-
     public Integer getAuthorID() {
         return authorID;
     }
@@ -91,8 +81,7 @@ public class Article implements Serializable {
                 "articleId=" + articleId +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", date=" + date +
-                ", imageFile='" + imageFile + '\'' +
+                ", date=" + date + '\'' +
                 ", authorID=" + authorID +
                 '}';
     }

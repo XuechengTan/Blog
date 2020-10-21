@@ -1,11 +1,99 @@
 package ictgradschool.project;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //just basic function, need to be modified in the future.
 public class ArticleDAO {
 
+    public static List<Article> getArticleByAuthorId(int id, Connection conn) throws SQLException {
+        List<Article> articles = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_article a WHERE a.authorID=?")) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Article article = createArticleFromResultSet(rs);
+                    articles.add(article);
+                }
 
+            }
+        }
+        if (articles.size() == 0) {
+            return null;
+        }
+        return articles;
+    }
+    public static Article getArticleByArticleId(int articleId, Connection conn) throws SQLException {
+        Article article=null;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_article a WHERE a.articleId=?")) {
+            stmt.setInt(1, articleId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                     article = createArticleFromResultSet(rs);
+
+                }
+
+            }
+        }
+        if (article == null) {
+            return null;
+        }
+        return article;
+    }
+    private static Article createArticleFromResultSet(ResultSet rs) throws SQLException {
+
+        Article article = new Article(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getDate(4),
+                rs.getInt(5)
+
+        );
+
+        return article;
+
+    }
+    public static boolean editArticle(Article article, Connection conn) throws SQLException {
+
+        // We can use prepared statements for database updates as well as queries.
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "UPDATE pb_article SET title = ?, content = ? WHERE articleId = ?")) {
+
+            // We set the prepared statement's variables exactly the same - replacing the ?'s with their actual values
+            // obtained from the Lecturer object.
+            stmt.setString(1, article.getTitle());
+            stmt.setString(2, article.getContent());
+            stmt.setInt(3, article.getArticleId());
+
+            // The executeUpdate() method will run an SQL INSERT, UPDATE, or DELETE. It will return an int value
+            // specifying how many rows are affected by the statement. In this case, this will be either 1 (if the update
+            // was successful) or 0 (if it wasn't, for example because a lecturer with the given staff_no doesn't exist).
+            int rowsAffected = stmt.executeUpdate();
+
+            // If rowsAffected is 1, it means the update was successful and we'll return true. Otherwise we return false.
+            return (rowsAffected == 1);
+
+        }
+
+    }
+    public static boolean deleteArticle(int articleId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_article WHERE articleId = ?")) {
+
+            stmt.setInt(1, articleId);
+
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
     public static boolean insertArticle(Article article, Connection conn) throws SQLException {
 
 
@@ -15,8 +103,8 @@ public class ArticleDAO {
             stmt.setString(1, article.getTitle());
             stmt.setString(2, article.getContent());
             stmt.setDate(3, (Date) article.getDate());
-            stmt.setString(4, article.getImageFile());
-            stmt.setInt(5,article.getAuthorID());
+
+            stmt.setInt(4, article.getAuthorID());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -44,7 +132,7 @@ public class ArticleDAO {
 
             stmt.setString(1, article.getTitle());
             stmt.setString(2, article.getContent());
-            stmt.setInt(3,article.getAuthorID());
+            stmt.setInt(3, article.getAuthorID());
 
             int rowsAffected = stmt.executeUpdate();
 

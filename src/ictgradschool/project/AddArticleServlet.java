@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @WebServlet(name = "ArticleServlet", urlPatterns = {"/articleservlet"})
-public class ArticleServlet extends HttpServlet {
+public class AddArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
