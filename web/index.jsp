@@ -15,7 +15,7 @@
     <h1>The Pokemon Blog</h1>
     <div id="nav">
         <a href="UserSignup.html">Create Account</a>
-        <a>Login</a>
+        <a href="Login.html">Login</a>
     </div>
 </div>
 
@@ -26,7 +26,7 @@
     </p>
     <p>Another paragraph.
     </p>
-    <a href="./WEB-INF/hello-world.jsp">Login</a>
+    <a href="Login.html">Login</a>
     <br>
     <br>
     <a href="UserSignup.html">Create Account</a>
