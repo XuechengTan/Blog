@@ -32,9 +32,6 @@
                 }
             }
         }
-        async function getUsername(){
-            let usernameObj = await fetch()
-        }
     </script>
 
 </head>
@@ -52,7 +49,7 @@
 
 <div id="content-wrapper">
 
-    <form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="return testPassword()" id="passwordForm">
+    <form action="./signUp" method="post" onsubmit="return testPassword()" id="passwordForm">
         <label>Choose username:</label><br>
         <input type="text" name="userName" id="userName" value="" onblur="testUserName()"><br><br>
         <label>Choose password:</label><br>
@@ -77,9 +74,8 @@
         <img src="images/avatar3.jpg"><br>
         <input type="radio" id="avatar4" name="avatar" value="avatar4.jpg">
         <img src="images/avatar4.jpg"><br><br>
-
         <label>Or upload a custom profile image: </label><br>
-        <input type="file" id="custom-avatar" name="avatar2" value="">
+        <input type="file" id="custom-avatar" name="custom-avatar" value="" accept="image/*">
 
 
         <br><br>
