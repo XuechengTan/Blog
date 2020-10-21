@@ -7,7 +7,6 @@
     <title>The Pokemon Blog</title>
     <link href ="Style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
-    <script src="ReplaceLoginButtons.js"></script>
 </head>
 <body>
 
@@ -15,21 +14,16 @@
     <h1>The Pokemon Blog</h1>
     <div id="nav">
         <a href="UserSignup.html">Create Account</a>
-        <a href="Login.html">Login</a>
+        <a>Login</a>
     </div>
 </div>
 
 <h1 id="title">Welcome to the Pokemon Blog!</h1>
 
 <div id="content-wrapper">
-    <p>The Pokemon Blog is a blogging site especially for Pokemon fans! Anyone can view our amazing Pokemon bloggers, and you can create a free account and start blogging yourself.
-    </p>
-    <p>Another paragraph.
-    </p>
-    <a href="Login.html">Login</a>
-    <br>
-    <br>
-    <a href="UserSignup.html">Create Account</a>
+    <p><strong>The article has been added to the blog successfully!</strong></p>
+    <a href="./index.jsp">Click here to return home page</a>
+
 </div>
 
 </body>

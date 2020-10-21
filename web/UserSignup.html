@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon Blog Signup</title>
+    <link href ="Style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+    <script src="ReplaceLoginButtons.js"></script>
+    <style>textarea {resize: none;}</style>
+    <script>
+
+        //This function is used for testing if the two passwords are the same.
+        function testPassword() {
+            let password = document.getElementById("passwordForm");
+            let passwordValue = password.password.value;
+            let passwordRepeatValue = password.rePassword.value;
+            if (!(passwordValue === passwordRepeatValue)) {
+                alert("Please check your password, cause two passwords are different");
+                return false;
+            }
+        }
+        //Add a function to test if the userName is valid.
+        function testUserName() {
+            //This existing name array I think can be taken from the serve side maybe through a session
+            let existingUserNames = ["Bob", "Alice", "James", "Harry", "Peter"];
+            let userName = document.getElementById("userName");
+            let userNameValue = userName.value;
+            for (let name of existingUserNames) {
+                if (userNameValue === name) {
+                    alert(userNameValue + " has already been taken");
+                    break;
+                }
+            }
+        }
+        async function getUsername(){
+            let usernameObj = await fetch()
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="header">
+    <h1>The Pokemon Blog</h1>
+    <div id="nav">
+        <a href="UserSignup.html">Create Account</a>
+        <a>Login</a>
+    </div>
+</div>
+
+<h1 id = title>Become a Pokemon Blogger!</h1>
+
+<div id="content-wrapper">
+
+    <form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="return testPassword()" id="passwordForm">
+        <label>Choose username:</label><br>
+        <input type="text" name="userName" id="userName" value="" onblur="testUserName()"><br><br>
+        <label>Choose password:</label><br>
+        <input type="password" name="password" value=""><br><br>
+        <label>Re-enter password:</label><br>
+        <input type="password" name="rePassword" value=""><br><br>
+        <label>Enter your first name:</label><br>
+        <input type="text" name ="firstName" value=""><br><br>
+        <label>Enter your surname:</label><br>
+        <input type="text" name="lastName" value=""><br><br>
+        <label>Enter your date of birth:</label><br>
+        <input type="date" name="dateOfBirth" value=""><br><br>
+        <label>Enter a brief description of yourself:</label><br>
+        <textarea name="description" value="" rows="3" cols="50"></textarea><br><br>
+
+        <label>Choose a profile image:</label><br>
+        <input type="radio" id="avatar1" name="avatar" value="avatar1.jpg">
+        <img src="images/avatar1.jpg"><br>
+        <input type="radio" id="avatar2" name="avatar" value="avatar2.jpg">
+        <img src="images/avatar2.jpg"><br>
+        <input type="radio" id="avatar3" name="avatar" value="avatar3.jpg">
+        <img src="images/avatar3.jpg"><br>
+        <input type="radio" id="avatar4" name="avatar" value="avatar4.jpg">
+        <img src="images/avatar4.jpg"><br><br>
+
+        <label>Or upload a custom profile image: </label><br>
+        <input type="file" id="custom-avatar" name="avatar2" value="">
+
+
+        <br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
+
+</body>
+</html>
