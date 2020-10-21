@@ -1,6 +1,7 @@
 package ictgradschool.project;
 
 import ictgradschool.project.util.DBConnectionUtils;
+import ictgradschool.project.util.PasswordUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,9 +24,10 @@ public class LoginServlet extends HttpServlet {
             String name = request.getParameter("name");
             String password = request.getParameter("password");
 
-
             request.setAttribute("name", name);
             request.setAttribute("password", password);
+
+
 
             request.getRequestDispatcher("WEB-INF/Login.jsp").forward(request, response);
         } catch (SQLException e) {
