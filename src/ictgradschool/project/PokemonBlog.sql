@@ -11,21 +11,21 @@ CREATE TABLE pb_user(
     passHashBase64 VARCHAR(128),
     saltBase64 VARCHAR(128),
     description TEXT DEFAULT NULL,
-    imageFilename VARCHAR (128)
+    imageFilename VARCHAR (128) DEFAULT NULL
 );
 CREATE TABLE pb_article(
     articleId INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     title VARCHAR (150) NOT NULL,
     content TEXT NOT NULL ,
-    dateCreated DATE DEFAULT NOW(),
-    imageFileName VARCHAR (128),
+    dateCreated DATETIME DEFAULT NOW(),
+    imageFileName VARCHAR (128) DEFAULT NULL,
     authorId INT (10),
     FOREIGN KEY (authorId) REFERENCES pb_user(userId)
 );
 CREATE TABLE pb_comments(
     commentId INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     content TEXT NOT NULL ,
-    dateCreated DATE DEFAULT NOW(),
+    dateCreated DATETIME DEFAULT NOW(),
     userId INT(10) NOT NULL,
     articleId INT(10) NOT NULL,
     FOREIGN KEY (userId) REFERENCES pb_user(userId),
@@ -33,8 +33,8 @@ CREATE TABLE pb_comments(
 );
 
 INSERT INTO pb_user(username, fname, lname, dob, passHashBase64, saltBase64, description, imageFilename) VALUES
-('Alice123', 'Alice', 'Lee', '1993-01-20', 'hash base generated', 'salt base generated', 'A description about Alice', '/images/Dragonite.png');
-INSERT INTO pb_article(title, content, dateCreated, imageFileName, authorId) VALUES
-('How to groom your Pokemon', 'An article about how to groom your pokemon', default, '/image/Dragonite.png',1);
-INSERT INTO pb_comments(content, dateCreated, userId, articleId) VALUES
-('This article is really interesting', default,1,1);
+('Alice125', 'Alice', 'Lee', '1993-01-20', 'hash base generated', 'salt base generated', 'A description about Alice', '/images/Dragonite.png');
+INSERT INTO pb_article(title, content, imageFileName, authorId) VALUES
+('How to groom your Pokemon', 'An article about how to groom your pokemon', '/image/Dragonite.png',1);
+INSERT INTO pb_comments(content, userId, articleId) VALUES
+('This article is really interesting', 1,1);

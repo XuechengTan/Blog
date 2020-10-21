@@ -27,7 +27,7 @@
             let userNameValue = userName.value;
             for (let name of existingUserNames) {
                 if (userNameValue === name) {
-                    alert(userNameValue + " has already been taken")
+                    alert(userNameValue + " has already been taken");
                     break;
                 }
             }
@@ -49,7 +49,7 @@
 
 <div id="content-wrapper">
 
-    <form action="./testPasswordServlet" method="post" onsubmit="return testPassword()" id="passwordForm">
+    <form action="./signUp" method="post" onsubmit="return testPassword()" id="passwordForm">
         <label>Choose username:</label><br>
         <input type="text" name="userName" id="userName" value="" onblur="testUserName()"><br><br>
         <label>Choose password:</label><br>
