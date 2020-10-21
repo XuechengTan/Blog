@@ -117,6 +117,7 @@ public class SignUpServlet extends HttpServlet {
                 // Save the article to the DB.
                 try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
                     UserDao.insertUser(newUser, conn);
+
                 }
 
             } catch (Exception e) {
