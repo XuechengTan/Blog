@@ -15,8 +15,7 @@ public class ArticleDAO {
             stmt.setString(1, article.getTitle());
             stmt.setString(2, article.getContent());
             stmt.setDate(3, (Date) article.getDate());
-            stmt.setString(4, article.getImageFile());
-            stmt.setInt(5,article.getAuthorID());
+            stmt.setInt(4,article.getAuthorID());
 
             int rowsAffected = stmt.executeUpdate();
 

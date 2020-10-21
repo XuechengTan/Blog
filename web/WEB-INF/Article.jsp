@@ -28,14 +28,9 @@
     <h1 id="title">${article.title}</h1>
     <h3>by ${article.authorID}</h3>
     <p>${article.date}</p>
-    <img src="${article.imageFile}"><br>
     <p>${article.content}</p>
 
 </div>
-
-
-
-
 
 </body>
 </html>
