@@ -29,6 +29,10 @@ public class SingleArticleServlet extends HttpServlet {
                     req.setAttribute("article",article);
                 }
             }
+
+            List<User> users = UserDao.getAllUsernameAndID(conn);
+
+            req.setAttribute("users",users);
             req.setAttribute("title",title);
             req.getRequestDispatcher("WEB-INF/Article.jsp").forward(req,resp);
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Playtech
@@ -26,7 +27,12 @@
 <div id="content-wrapper">
 
     <h1 id="title">${article.title}</h1>
-    <h3>by ${article.authorID}</h3>
+    <h3>by <c:forEach var="user" items="${users}">
+        <c:if test="${article.authorID == user.userId}">
+            ${user.userName}
+        </c:if>
+    </c:forEach>
+        </h3>
     <p>${article.date}</p>
     <p>${article.content}</p>
 

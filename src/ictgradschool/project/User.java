@@ -43,6 +43,11 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
+    public User(int userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
     public User() {
     }
 
