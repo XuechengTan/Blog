@@ -28,13 +28,14 @@
 <div id="content-wrapper">
 
     <c:forEach var="article" items="${articles}">
-        <h2><a href="/singlearticleservlet?title=${article.title}">${article.title}</a> by
+        <h2><a href="/singlearticleservlet?id=${article.articleId}">${article.title}</a> by
             <c:forEach var="user" items="${users}">
             <c:if test="${article.authorID == user.userId}">
                 ${user.userName}
             </c:if>
         </c:forEach></h2><br>
     </c:forEach>
+
 
 </div>
 
