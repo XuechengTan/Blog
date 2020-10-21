@@ -6,6 +6,22 @@ import java.util.List;
 
 public class UserDao {
 
+    public static List<User> getAllUsernameAndID(Connection conn) throws SQLException {
+        List<User> users = new ArrayList<>();
+
+        try (Statement stmt = conn.createStatement()) {
+
+            try (ResultSet rs = stmt.executeQuery("SELECT userId, username FROM pb_user")) {
+
+                while (rs.next()) {
+                    User user = new User(rs.getInt(1),rs.getString(2));
+                    users.add(user);
+                }
+            }
+        }
+        return users;
+    }
+
     public static List<User> getAllUserName(Connection conn) throws SQLException {
 
         List<User> users = new ArrayList<>();

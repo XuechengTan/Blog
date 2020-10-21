@@ -2,6 +2,9 @@ package ictgradschool.project;
 
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,14 +12,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 
 @WebServlet(name = "signUp",  urlPatterns = {"/signUp"} )
 public class SignUpServlet extends HttpServlet {
+
+    private File uploadsFolder; // The folder where article images should be uploaded
+    private File tempFolder; // The temp folder required by the file-upload logic
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        // Get the upload folder, ensure it exists.
+        this.uploadsFolder = new File(getServletContext().getRealPath("/images"));
+        if (!uploadsFolder.exists()) {
+            uploadsFolder.mkdirs();
+        }
+        // Create the temporary folder that the file-upload mechanism needs.
+        this.tempFolder = new File(getServletContext().getRealPath("/WEB-INF/temp"));
+        if (!tempFolder.exists()) {
+            tempFolder.mkdirs();
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,43 +52,82 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String username = req.getParameter("userName");
-        String password = req.getParameter("rePassword");
 
-        byte[] saltGenerated = PasswordUtil.getNextSalt();
-        byte[] hashGenerated = PasswordUtil.insecureHash(password);
+        // Set up file upload mechanism
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setRepository(tempFolder);
+        ServletFileUpload upload = new ServletFileUpload(factory);
 
-        String salt = PasswordUtil.base64Encode(saltGenerated);
-        String hash = PasswordUtil.base64Encode(hashGenerated);
+        User newUser = new User();
+            try {
+                // Parse the form (works differently since we're expecting a file, amongst other form fields).
+                List<FileItem> fileItems = upload.parseRequest(req);
+                for (FileItem fi : fileItems) {
+                    switch (fi.getFieldName()) {
+                        case "userName":
+                        newUser.setUserName(fi.getString());
+                        break;
 
-        String fName = req.getParameter("firstName");
-        String lName = req.getParameter("lastName");
-        Date dob = null;
+                        case"rePassword":
+                        String password = fi.getString();
 
-        try {
-            dob = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("dateOfBirth"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+                        byte[] saltGenerated = PasswordUtil.getNextSalt();
+                        byte[] hashGenerated = PasswordUtil.insecureHash(password);
 
-        String description = req.getParameter("description");
-        String imageFile = req.getParameter("avatar");
+                        String salt = PasswordUtil.base64Encode(saltGenerated);
+                        newUser.setSaltBase64(salt);
+                        String hash = PasswordUtil.base64Encode(hashGenerated);
+                        newUser.setPasswordHashBase64(hash);
+                        break;
 
-        User newUser = new User(username, fName, lName, hash, salt, dob, description, imageFile);
-        req.getSession().setAttribute("newUser", newUser);
+                        case "firstName":
+                        newUser.setfName(fi.getString());
+                        break;
 
+                        case "lastName":
+                        newUser.setlName(fi.getString());
+                        break;
 
-        // Save the article to the DB.
-        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            UserDao.insertUser(newUser, conn);
-        }
+                        case "dateOfBirth":
+                            System.out.println(fi.getString());
+                            Date dob = new SimpleDateFormat("yyyy-MM-dd").parse(fi.getString());
+                            newUser.setDob(dob);
+                            break;
 
-        catch (Exception e) {
-            throw new ServletException(e);
-        }
+                        case "description":
+                        newUser.setDescription(fi.getString());
+                        break;
 
+                        case "avatar":
+                            if(fi.getString()!=null) {
+                                newUser.setImagePath(fi.getString());
+                                continue;
+                            }else break;
+
+                        case "avatar2":
+                            if(fi.getName()!=null) {
+                                File imageFile2 = new File(this.uploadsFolder, fi.getName());
+                                newUser.setImagePath(fi.getName());
+                                fi.write(imageFile2);
+                                break;
+                            }
+                    }
+                }
+
+                // Save the article to the DB.
+                try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+                    UserDao.insertUser(newUser, conn);
+                }
+
+            } catch (Exception e) {
+                throw new ServletException(e);
+            }
+        req.getSession().setAttribute("user", newUser);
         // Redirect to the main articles page.
         resp.sendRedirect("./index.jsp");
     }
 
 }
+
+
+

@@ -1,7 +1,6 @@
 package ictgradschool.project;
 
 import ictgradschool.project.util.DBConnectionUtils;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,34 +15,26 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@WebServlet(name = "ArticleServlet", urlPatterns = {"/articleservlet"})
-public class AddArticleServlet extends HttpServlet {
+@WebServlet(name = "SingleArticleServlet", urlPatterns = {"/singlearticleservlet"})
+public class SingleArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
+            List<Article> articles = ArticleAccessDAO.getAllArticles(conn);
             String title = req.getParameter("title");
-            String content = req.getParameter("article-text-area");
-
-            int authorId=Integer.parseInt(req.getParameter("userID"));
-
-            Article article = new Article(title, content, authorId);
-
-
-            //boolean success = ArticleDAO.insertArticle(article, conn);
-            boolean success = ArticleDAO.insertArticleWithoutDateAndImage(article, conn);
-
-
-
-            if (success) {
-                System.out.println("article added");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/after-submit-article.jsp");
-                dispatcher.forward(req, resp);
-            } else {
-                System.out.println("article added failed");
+            for (Article article: articles) {
+                if(title.equals(article.getTitle())) {
+                    req.setAttribute("article",article);
+                }
             }
 
+            List<User> users = UserDao.getAllUsernameAndID(conn);
+
+            req.setAttribute("users",users);
+            req.setAttribute("title",title);
+            req.getRequestDispatcher("WEB-INF/Article.jsp").forward(req,resp);
 
         } catch (SQLException  e) {
 
@@ -61,5 +52,3 @@ public class AddArticleServlet extends HttpServlet {
 
     }
 }
-
-
