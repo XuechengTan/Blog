@@ -23,7 +23,9 @@ public class ArticleAccessServlet extends HttpServlet {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             List<Article> articles = ArticleAccessDAO.getAllArticles(conn);
+            List<User> users = UserDao.getAllUsernameAndID(conn);
 
+            req.setAttribute("users",users);
             req.setAttribute("articles",articles);
             req.getRequestDispatcher("WEB-INF/Articles.jsp").forward(req,resp);
 
