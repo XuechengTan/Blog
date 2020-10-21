@@ -36,6 +36,33 @@
     <p>${article.date}</p>
     <p>${article.content}</p>
 
+<br><h2>Comments</h2>
+
+<c:forEach var="comment" items="${comments}">
+    <h3>
+    <c:forEach var="user" items="${users}">
+        <c:if test="${comment.userId == user.userId}">
+            ${user.userName}
+        </c:if>
+    </c:forEach>
+        </h3>
+
+        <p>${comment.comment}</p>
+</c:forEach>
+
+    <br>
+    <h3>Add Comment</h3>
+
+    <form action="/createcomment" method="get">
+        <label>Enter comment: </label><br>
+        <textarea id="comment-text-area" name="comment-text-area" rows="4" cols="50"></textarea>
+        <input type="hidden" name="articleId" value="${article.articleId}">
+        <input type="hidden" name="userID" value="1"><br>
+        <input type="submit" value="Post Comment"><br><br>
+
+        for current test purposes submitting user ID always equals 1, must fix
+    </form>
+
 </div>
 
 </body>
