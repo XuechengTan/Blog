@@ -19,18 +19,22 @@
                 return false;
             }
         }
+
         //Add a function to test if the userName is valid.
         function testUserName() {
-            //This existing name array I think can be taken from the serve side maybe through a session
-            let existingUserNames = ["Bob", "Alice", "James", "Harry", "Peter"];
+
             let userName = document.getElementById("userName");
-            let userNameValue = userName.value;
-            for (let name of existingUserNames) {
-                if (userNameValue === name) {
-                    alert(userNameValue + " has already been taken");
-                    break;
-                }
-            }
+            // send the username value to servlet and check with existing username and return pass or fail
+            fetch(`/usernames?username=${userName.value}`,{
+                method:"GET"})
+            .then(function (res){
+                return res.json();})
+                .then(function (text){
+                    if(text == "fail"){
+                        alert("Username "+userName.value +" already taken!");
+                    }
+                })
+                .catch(function (res){console.log(res)})
         }
     </script>
 
