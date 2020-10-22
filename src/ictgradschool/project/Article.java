@@ -2,6 +2,7 @@
 package ictgradschool.project;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Article implements Serializable {
@@ -44,6 +45,7 @@ public class Article implements Serializable {
     }
 
     public String getTitle() {
+
         return title;
     }
 
@@ -60,10 +62,12 @@ public class Article implements Serializable {
     }
 
     public Date getDate() {
+
         return date;
     }
 
     public void setDate(Date date) {
+        SimpleDateFormat myFmt2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.date = date;
     }
 
