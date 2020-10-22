@@ -13,8 +13,11 @@
 <div id="header">
     <h1>The Pokemon Blog</h1>
     <div id="nav">
-        <a href="UserSignup.html">Create Account</a>
-        <a>Login</a>
+        <a href="../index.jsp">Home</a>
+        <a href="../ArticleCreatePart.html">Add New Article</a>
+        <a>Profile</a>
+        <a href="../myArticle.jsp">My Articles</a>
+        <a>Logout</a>
     </div>
 </div>
 
@@ -22,7 +25,8 @@
 
 <div id="content-wrapper">
     <p><strong>The article has been added to the blog successfully!</strong></p>
-    <a href="./index.jsp">Click here to return home page</a>
+    <a href="./index.jsp">Click here to return home page</a><br>
+    <a href="./myArticle.jsp">Click here to see all your articles </a>
 
 </div>
 
