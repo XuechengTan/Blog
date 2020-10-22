@@ -2,6 +2,7 @@
 package ictgradschool.project;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Article implements Serializable {
@@ -43,9 +44,7 @@ public class Article implements Serializable {
         this.articleId = articleId;
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public void setTitle(String title) {
         this.title = title;
@@ -59,13 +58,9 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    public Date getDate() {
-        return date;
-    }
+    public Date getDate() { return date; }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public void setDate(Date date) { this.date = date; }
 
     public Integer getAuthorID() {
         return authorID;

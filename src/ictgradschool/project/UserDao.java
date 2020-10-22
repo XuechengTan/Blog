@@ -22,6 +22,40 @@ public class UserDao {
         return users;
     }
 
+    public static List<User> getAllUsers(Connection conn) throws SQLException {
+
+        List<User> users = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            try (ResultSet rs = stmt.executeQuery("SELECT * FROM pb_user")) {
+
+                // We can iterate through all rows in the ResultSet like this...
+                while (rs.next()) {
+                    User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6), rs.getString(7), rs.getDate(5), rs.getString(8), rs.getString(9));
+                    users.add(user);
+
+                }
+            }
+        }
+        return users;
+    }
+
+    public static String getUserHash(Connection conn, String username) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT passHashBase64 FROM pb_user WHERE username = ?")) {
+            stmt.setString(1, username);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+
+                if (rs.next()) {
+                    String hash = rs.getString(1);
+                    return hash;
+                }
+            }
+        }
+        return "";
+    }
+
+
+
     public static List<User> getAllUserName(Connection conn) throws SQLException {
 
         List<User> users = new ArrayList<>();
