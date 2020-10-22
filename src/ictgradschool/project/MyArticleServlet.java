@@ -19,10 +19,9 @@ public class MyArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            //this is just for test. And storing a user's login information may should use an object, and
-            //user information should be stored in session in another servlet
-            req.getSession().setAttribute("userId", 1);
-            int userId = Integer.parseInt(req.getSession().getAttribute("userId").toString());
+
+            User user =(User) req.getSession().getAttribute("loginUser");
+            int userId = user.getUserId();
             List<Article> articles = ArticleDAO.getArticleByAuthorId(userId, conn);
             req.setAttribute("Articles", articles);
 
