@@ -47,7 +47,7 @@ public class ArticleDAO {
                 rs.getInt(1),
                 rs.getString(2),
                 rs.getString(3),
-                rs.getDate(4),
+                rs.getTimestamp(4),
                 rs.getInt(5)
 
         );

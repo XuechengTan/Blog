@@ -14,12 +14,44 @@ public class CommentDAO {
             try (ResultSet rs = stmt.executeQuery("SELECT * FROM pb_comments")) {
 
                 while (rs.next()) {
-                    Comment comment = new Comment(rs.getInt(1),rs.getString(2),rs.getDate(3),rs.getInt(5),rs.getInt(4));
+                    Comment comment = new Comment(rs.getInt(1),rs.getString(2),rs.getTimestamp(3),rs.getInt(5),rs.getInt(4));
                     comments.add(comment);
                 }
             }
         }
         return comments;
+    }
+    public static List<Comment> getAllComment(Connection conn) throws SQLException {
+
+        List<Comment> comments = new ArrayList<>();
+
+        try (Statement stmt = conn.createStatement()) {
+            try (ResultSet rs = stmt.executeQuery("SELECT*FROM pb_comments")) {
+                while (rs.next()) {
+                    Comment comment = createCommentFromResultSet(rs);
+                    comments.add(comment);
+                }
+            }
+        }
+
+        return comments;
+    }
+    public static Comment getCommentByArticleId(int articleId, Connection conn) throws SQLException {
+        Comment comment=null;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_comments a WHERE a.articleId=?")) {
+            stmt.setInt(1, articleId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    comment = createCommentFromResultSet(rs);
+
+                }
+
+            }
+        }
+        if (comment == null) {
+            return null;
+        }
+        return comment;
     }
 
     public static boolean createComment(Connection conn, Comment comment) throws SQLException {
@@ -46,6 +78,20 @@ public class CommentDAO {
             }
 
         }
+    }
+
+    private static Comment createCommentFromResultSet(ResultSet rs) throws SQLException {
+
+        Comment comment = new Comment(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getDate(3),
+                rs.getInt(4),
+                rs.getInt(5)
+        );
+
+        return comment;
+
     }
 
 }

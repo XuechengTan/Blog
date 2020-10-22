@@ -24,8 +24,14 @@ public class MyArticleServlet extends HttpServlet {
             req.getSession().setAttribute("userId", 1);
             int userId = Integer.parseInt(req.getSession().getAttribute("userId").toString());
             List<Article> articles = ArticleDAO.getArticleByAuthorId(userId, conn);
-
             req.setAttribute("Articles", articles);
+
+
+            List<Comment> comments=CommentDAO.getAllComments(conn);
+            req.setAttribute("comments",comments);
+
+
+         
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/myArticle.jsp");
             dispatcher.forward(req, resp);
         } catch (SQLException e) {
