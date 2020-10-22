@@ -129,4 +129,43 @@ public class UserDao {
         }
     }
 
+    public static boolean deleteUser(int userId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_user WHERE userId = ?")) {
+
+            stmt.setInt(1, userId);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+
+    public static boolean editArticle(User user, Connection conn) throws SQLException {
+
+       // username, fname, lname, dob, passHashBase64, saltBase64, description, imageFilename
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "UPDATE pb_user SET username = ?, fname = ?, lname = ?, dob = ? description = ?, imageFilename =? WHERE articleId = ?")) {
+
+
+            stmt.setString(1, user.getUserName());
+            stmt.setString(2, user.getfName());
+            stmt.setString(3, user.getlName());
+            stmt.setDate(4, new java.sql.Date(user.getDob().getTime()));
+            stmt.setString(5,user.getDescription());
+            stmt.setString(6,user.getImagePath());
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+
+
 }
