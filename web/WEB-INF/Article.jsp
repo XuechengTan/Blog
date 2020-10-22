@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Playtech
@@ -39,15 +40,16 @@
 <br><h2>Comments</h2>
 
 <c:forEach var="comment" items="${comments}">
-    <h3>
+
     <c:forEach var="user" items="${users}">
         <c:if test="${comment.userId == user.userId}">
-            ${user.userName}
+        <p style="font-weight: bold">${user.userName}</p>
+            <p><fmt:formatDate
+                    value="${comment.date}" type="both" pattern="yyyy-MM-dd HH:mm"/></p>
         </c:if>
     </c:forEach>
-        </h3>
 
-        <p>${comment.comment}</p>
+        <p>${comment.comment}</p><br>
 </c:forEach>
 
     <br>
