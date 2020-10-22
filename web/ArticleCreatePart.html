@@ -120,8 +120,16 @@
 </head>
 <body>
 <div id="header">
-    <h1>Article Create Part</h1>
+    <h1>Article Create Par</h1>
+    <div id="nav">
+        <a href="index.jsp">Home</a>
+        <a href="ArticleCreatePart.html">Add New Article</a>
+        <a>Profile</a>
+        <a href="myArticle.jsp">My Articles</a>
+        <a>Logout</a>
+    </div>
 </div>
+
 <div id="content-wrapper">
     <form id="articleForm" action="./articleservlet" method="get">
         <label><strong>Your article title</strong></label><br>
@@ -129,7 +137,7 @@
         <label><strong>Please write your article</strong></label><br>
         <textarea id="article-text" name="article-text-area"></textarea>
         <input type="hidden" name="currentDate" value="">
-        <input type="hidden" name="userID" value="1">
+        <!--<input type="hidden" name="userID" value="1">-->
         <input type="hidden" name="imageFileName" value="">
 
     </form>
@@ -227,11 +235,39 @@
 </div>
 </span>
                 </div>
+
                 <div class="box">
-                <span class="btn" data-action="foreColor" data-name="#FF0000" title="red">
-          <img src="images/editor/size7.SVG">
+                    <span class="btn has-submenu"><p><strong>Font Color</strong><p>
+    <div class="submenu">
+                    <span class="btn" data-action="foreColor" data-name="#FF0000" title="Red">
+                       <img src="images/editor/redFont.SVG" alt="">
             </span>
+                            <span class="btn" data-action="foreColor" data-name="#FF7F00" title="Orange">
+          <img src="images/editor/orangeFont.SVG" alt="">
+            </span>
+                            <span class="btn" data-action="foreColor" data-name="#FFFF00" title="Yellow">
+         <img src="images/editor/yellowFont.SVG" alt="">
+            </span>
+                            <span class="btn" data-action="foreColor" data-name="#0000FF" title="Blue">
+          <img src="images/editor/blueFont.SVG" alt="">
+            </span>
+                            <span class="btn" data-action="foreColor" data-name="#008000" title="Green">
+          <img src="images/editor/greenFont.SVG" alt="">
+            </span>
+                            <span class="btn" data-action="foreColor" data-name="#00FFFF" title="Cyan">
+          <img src="images/editor/cyanFont.SVG" alt="">
+            </span>
+                            <span class="btn" data-action="foreColor" data-name="#800080" title="purple">
+          <img src="images/editor/purpleFont.SVG" alt="">
+            </span>
+                                 <span class="btn" data-action="foreColor" data-name="#000000" title="Black">
+          <img src="images/editor/blackFont.SVG" alt="">
+            </span>
+
+</div>
+</span>
                 </div>
+
 
             </div>
 
@@ -245,6 +281,16 @@
           <img src="./images/editor/removeFormat.svg">
         </span>
                 </div>
+
+                <div class="box">
+                    <span class="btn" data-action="createLink" title="Insert Link">
+          <img src="images/editor/size7.SVG">
+        </span>
+                    <span class="btn" data-action="unlink" title="Unlink">
+          <img  src="images/editor/size7.SVG">
+        </span>
+                </div>
+
             </div>
         </div>
         <div class="content-area">
@@ -273,37 +319,17 @@
 
             if (action === 'backColor') {
                 let name = this.dataset.name;
-
                 document.execCommand(action, false, name);
             } else if (action==='foreColor'){
-                document.execCommand(action, false, "#FF0000");
-            }else if (action === 'fontSize') {
                 let name = this.dataset.name;
-                switch (name) {
-                    case("1"):
-                        document.execCommand(action, false, 1);
-                        break;
-                    case('2'):
-
-                        document.execCommand(action, false, 2);
-                        break;
-                    case('3'):
-                        document.execCommand(action, false, 3);
-                        break;
-                    case('4'):
-                        document.execCommand(action, false, 4);
-                        break;
-                    case('5'):
-                        document.execCommand(action, false, 5);
-                        break;
-                    case('6'):
-                        document.execCommand(action, false, 6);
-                        break;
-                    case('7'):
-                        document.execCommand(action, false, 7);
-                        break;
-                }
-            } else {
+                document.execCommand(action, false, name);
+            }else if (action === 'fontSize') {
+                let name = parseInt(this.dataset.name);
+                document.execCommand(action, false, name);
+            }else if (action==='createLink'){
+                let linkValue = prompt('Link (e.g. https://www.youtube.com/)');
+                document.execCommand('createLink', false, linkValue);
+            }else {
                 document.execCommand(action, false);
             }
         });

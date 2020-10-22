@@ -25,8 +25,8 @@ public class AddArticleServlet extends HttpServlet {
 
             String title = req.getParameter("title");
             String content = req.getParameter("article-text-area");
-
-            int authorId=Integer.parseInt(req.getParameter("userID"));
+            User author=(User)req.getSession().getAttribute("loginUser");
+            int authorId=author.getUserId();
 
             Article article = new Article(title, content, authorId);
 
