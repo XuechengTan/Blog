@@ -127,9 +127,9 @@
     <h1>The Pokemon Blog</h1>
     <div id="nav">
         <a href="index.jsp">Home</a>
-        <a>Add New Article</a>
+        <a href="ArticleCreatePart.html">Add New Article</a>
         <a>Profile</a>
-        <a>My Articles</a>
+        <a href="myArticle.jsp">My Articles</a>
         <a>Logout</a>
     </div>
 </div>
