@@ -39,6 +39,32 @@ public class UserDao {
         return users;
     }
 
+    public static User getUserByUserId(int userId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_user WHERE a.userId=?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return getUserFromResultSet(rs);
+
+                }else{
+                    return null;
+                }
+            }
+        }
+    }
+
+    private static User getUserFromResultSet(ResultSet rs) throws SQLException {
+        return new User(
+                rs.getString(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getDate(4),
+                rs.getString(5),
+                rs.getString(6)
+        );
+    }
+
     public static boolean insertUser(User user, Connection conn) throws SQLException {
 
         try (PreparedStatement stmt = conn.prepareStatement(

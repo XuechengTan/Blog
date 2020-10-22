@@ -26,7 +26,7 @@ public class UsernameServlet extends HttpServlet {
 
             String content= "fail";
             for(User user: userList){
-                System.out.println(user.getUserName());
+
                 if(user.getUserName().equals(username)){
                     content = "fail";
                     break;

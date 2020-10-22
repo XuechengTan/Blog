@@ -20,7 +20,7 @@
             }
         }
 
-        //Add a function to test if the userName is valid.
+        //A function to test if the userName is valid.
         function testUserName() {
 
             let userName = document.getElementById("userName");
@@ -31,7 +31,7 @@
                 return res.json();})
                 .then(function (text){
                     if(text == "fail"){
-                        alert("Username "+userName.value +" already taken!");
+                        alert("Username "+userName.value +" is already taken!");
                     }
                 })
                 .catch(function (res){console.log(res)})
