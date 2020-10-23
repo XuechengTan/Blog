@@ -88,18 +88,18 @@
         }
 
 
-
-        .short{
+        .short {
             height: 0;
-            overflow : hidden;
+            overflow: hidden;
 
         }
-        .all{
+
+        .all {
             height: 100%;
-            overflow : hidden;
+            overflow: hidden;
         }
 
-        .showButton{
+        .showButton {
             width: 100%;
             height: 3rem;
             border: 1px solid;
@@ -110,11 +110,11 @@
             text-align: center;
             margin: auto;
         }
-        .showButton:hover{
+
+        .showButton:hover {
             background-color: coral;
             cursor: pointer;
         }
-
 
 
     </style>
@@ -130,13 +130,17 @@
         <a href="ArticleCreatePart.html">Add New Article</a>
         <a href="Profile.jsp">Profile</a>
         <a href="myArticle.jsp">My Articles</a>
-        <a>Logout</a>
+        <a class="logout">Logout</a>
     </div>
 </div>
 
 <h1 id="title">My Articles</h1>
 
 <div id="content-wrapper">
+
+    <form class="logoutForm" action="/logout" method="get">
+
+    </form>
 
 
     <c:forEach var="article" items="${Articles}">
@@ -231,20 +235,26 @@
     const showButtons = document.getElementsByClassName("showButton");
     let p = document.querySelectorAll(".con .short");
 
-    for(let i=0; i<showButtons.length; i++) {
+    for (let i = 0; i < showButtons.length; i++) {
         showButtons[i].onclick = function () {
-            if(this.innerHTML === "Show whole article"){
+            if (this.innerHTML === "Show whole article") {
                 p[i].classList.remove("short");
                 p[i].classList.add("all");
                 this.innerHTML = "Pack up";
-            }
-            else{
+            } else {
                 p[i].classList.remove("all");
                 p[i].classList.add("short");
                 this.innerHTML = "Show whole article";
             }
         }
     }
+
+    const logoutLink = document.getElementsByClassName('logout')[0];
+    const logoutForm = document.getElementsByClassName('logoutForm')[0];
+    logoutLink.addEventListener('click', function () {
+        logoutForm.submit();
+    })
+
 
 </script>
 </html>
