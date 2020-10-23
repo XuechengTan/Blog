@@ -23,7 +23,7 @@ window.addEventListener("load",function () {
         nav.appendChild(create);
 
         let profile = document.createElement("a");
-        profile.setAttribute("href","ViewProfile.html")
+        profile.setAttribute("href","Profile.jsp")
         profile.innerHTML = "Profile";
         nav.appendChild(profile);
 

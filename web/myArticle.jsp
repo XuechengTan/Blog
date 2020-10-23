@@ -128,7 +128,7 @@
     <div id="nav">
         <a href="index.jsp">Home</a>
         <a href="ArticleCreatePart.html">Add New Article</a>
-        <a>Profile</a>
+        <a href="Profile.jsp">Profile</a>
         <a href="myArticle.jsp">My Articles</a>
         <a class="logout">Logout</a>
     </div>

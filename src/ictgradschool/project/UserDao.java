@@ -30,7 +30,7 @@ public class UserDao {
 
                 // We can iterate through all rows in the ResultSet like this...
                 while (rs.next()) {
-                    User user = new User(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(6),rs.getString(7),rs.getDate(5), rs.getString(8),rs.getString(9) );
+                    User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(6),rs.getString(7),rs.getDate(5), rs.getString(8),rs.getString(9) );
                     users.add(user);
 
                 }
@@ -38,23 +38,6 @@ public class UserDao {
         }
         return users;
     }
-
-    public static String getUserHash(Connection conn, String username) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT passHashBase64 FROM pb_user WHERE username = ?")) {
-            stmt.setString(1, username);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-
-                if (rs.next()) {
-                    String hash = rs.getString(1);
-                    return hash;
-                }
-            }
-        }
-        return "";
-    }
-
-
 
     public static List<User> getAllUserName(Connection conn) throws SQLException {
 
@@ -71,6 +54,32 @@ public class UserDao {
             }
         }
         return users;
+    }
+
+    public static User getUserByUserId(int userId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pb_user WHERE a.userId=?")) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return getUserFromResultSet(rs);
+
+                }else{
+                    return null;
+                }
+            }
+        }
+    }
+
+    private static User getUserFromResultSet(ResultSet rs) throws SQLException {
+        return new User(
+                rs.getString(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getDate(4),
+                rs.getString(5),
+                rs.getString(6)
+        );
     }
 
     public static boolean insertUser(User user, Connection conn) throws SQLException {
@@ -102,5 +111,44 @@ public class UserDao {
             }
         }
     }
+
+    public static boolean deleteUser(int userId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_user WHERE userId = ?")) {
+
+            stmt.setInt(1, userId);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+
+    public static boolean editArticle(User user, Connection conn) throws SQLException {
+
+       // username, fname, lname, dob, passHashBase64, saltBase64, description, imageFilename
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "UPDATE pb_user SET username = ?, fname = ?, lname = ?, dob = ? description = ?, imageFilename =? WHERE articleId = ?")) {
+
+
+            stmt.setString(1, user.getUserName());
+            stmt.setString(2, user.getfName());
+            stmt.setString(3, user.getlName());
+            stmt.setDate(4, new java.sql.Date(user.getDob().getTime()));
+            stmt.setString(5,user.getDescription());
+            stmt.setString(6,user.getImagePath());
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+
 
 }
