@@ -104,7 +104,7 @@ public class SignUpServlet extends HttpServlet {
                                 continue;
                             }else break;
 
-                        case "avatar2":
+                        case "custom-avatar":
                             if(fi.getName()!=null) {
                                 File imageFile2 = new File(this.uploadsFolder, fi.getName());
                                 newUser.setImagePath(fi.getName());
