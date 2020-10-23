@@ -114,7 +114,6 @@ public class SignUpServlet extends HttpServlet {
                     }
                 }
 
-                // Save the article to the DB.
                 try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
                     UserDao.insertUser(newUser, conn);
 
@@ -123,9 +122,9 @@ public class SignUpServlet extends HttpServlet {
             } catch (Exception e) {
                 throw new ServletException(e);
             }
-        req.getSession().setAttribute("user", newUser);
+//        req.getSession().setAttribute("user", newUser);
         // Redirect to the main articles page.
-        resp.sendRedirect("./index.jsp");
+        resp.sendRedirect("./Login.html");
     }
 
 }

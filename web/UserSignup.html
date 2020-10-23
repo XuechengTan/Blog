@@ -36,6 +36,18 @@
                 })
                 .catch(function (res){console.log(res)})
         }
+
+        function emptyValidation(inputTxt) {
+            if (inputTxt.value.length == 0)
+            {
+                document.inputTxt.style.background =   'Yellow';
+            }
+            else
+            {
+                document.inputTxt.style.background = 'White';
+            }
+            return error;
+        }
     </script>
 
 </head>
@@ -53,13 +65,13 @@
 
 <div id="content-wrapper">
 
-    <form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="return testPassword()" id="passwordForm">
+    <form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="" id="passwordForm">
         <label>Choose username:</label><br>
         <input type="text" name="userName" id="userName" value="" onblur="testUserName()"><br><br>
         <label>Choose password:</label><br>
-        <input type="password" name="password" value=""><br><br>
+        <input type="password" name="password" value="" ><br><br>
         <label>Re-enter password:</label><br>
-        <input type="password" name="rePassword" value=""><br><br>
+        <input type="password" name="rePassword" value="" onblur="return testPassword()"><br><br>
         <label>Enter your first name:</label><br>
         <input type="text" name ="firstName" value=""><br><br>
         <label>Enter your surname:</label><br>

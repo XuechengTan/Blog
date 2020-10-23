@@ -19,7 +19,7 @@ CREATE TABLE pb_article(
     content TEXT NOT NULL ,
     dateCreated DATETIME DEFAULT NOW(),
     authorId INT (10),
-    FOREIGN KEY (authorId) REFERENCES pb_user(userId)
+    FOREIGN KEY (authorId) REFERENCES pb_user(userId) ON DELETE CASCADE
 );
 CREATE TABLE pb_comments(
     commentId INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -27,8 +27,8 @@ CREATE TABLE pb_comments(
     dateCreated DATETIME DEFAULT NOW(),
     userId INT(10) NOT NULL,
     articleId INT(10) NOT NULL,
-    FOREIGN KEY (userId) REFERENCES pb_user(userId),
-    FOREIGN KEY (articleId) REFERENCES pb_article(articleId)
+    FOREIGN KEY (userId) REFERENCES pb_user(userId) ON DELETE CASCADE ,
+    FOREIGN KEY (articleId) REFERENCES pb_article(articleId) ON DELETE CASCADE
 );
 
 INSERT INTO pb_user(username, fname, lname, dob, passHashBase64, saltBase64, description, imageFilename) VALUES
@@ -37,3 +37,4 @@ INSERT INTO pb_article(title, content, authorId) VALUES
 ('How to groom your Pokemon', 'An article about how to groom your pokemon',1);
 INSERT INTO pb_comments(content, userId, articleId) VALUES
 ('This article is really interesting', 1,1);
+

@@ -35,9 +35,8 @@ public class LoginServlet extends HttpServlet {
                     if (hash.equals(users.get(i).getPasswordHashBase64())) {
                         request.setAttribute("name", name);
 
+                        System.out.println("before session attribute");
 
-                        // Need to finish code to create the Session
-                        // And to create a session-id cookie
                         request.getSession().setAttribute("loginUser", users.get(i));
 
                         request.getRequestDispatcher("ArticleCreatePart.html").forward(request, response);
