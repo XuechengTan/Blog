@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-@WebServlet(name = "LoginServlet", urlPatterns = { "/Login" })
+@WebServlet(name = "LoginServlet", urlPatterns = {"/Login"})
 public class LoginServlet extends HttpServlet {
 
     @Override
@@ -28,11 +28,11 @@ public class LoginServlet extends HttpServlet {
             byte[] hashGenerated = PasswordUtil.insecureHash(password);
             String hash = PasswordUtil.base64Encode(hashGenerated);
 
-            for (int i = 0; i <users.size() ; i++) {
+            for (int i = 0; i < users.size(); i++) {
                 System.out.println(users.get(i).getUserName());
-                if (name.equals(users.get(i).getUserName())){
+                if (name.equals(users.get(i).getUserName())) {
 
-                    if (hash.equals(users.get(i).getPasswordHashBase64())){
+                    if (hash.equals(users.get(i).getPasswordHashBase64())) {
                         request.setAttribute("name", name);
 
 
@@ -42,19 +42,11 @@ public class LoginServlet extends HttpServlet {
 
                         request.getRequestDispatcher("ArticleCreatePart.html").forward(request, response);
                         return;
-                    }else {
-                        request.getRequestDispatcher("wrongInput.jsp").forward(request, response);
-                        return;
                     }
-
-                    }
-
+                }
             }
-
-//
-
-
-
+            request.getRequestDispatcher("wrongInput.jsp").forward(request, response);
+            return;
         } catch (SQLException e) {
             e.printStackTrace();
         }
