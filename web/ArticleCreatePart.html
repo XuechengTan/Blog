@@ -126,18 +126,22 @@
         <a href="ArticleCreatePart.html">Add New Article</a>
         <a>Profile</a>
         <a href="myArticle.jsp">My Articles</a>
-        <a>Logout</a>
+        <a class="logout">Logout</a>
     </div>
 </div>
 
 <div id="content-wrapper">
+
+    <form class="logoutForm" action="/logout" method="get">
+
+    </form>
+
     <form id="articleForm" action="./articleservlet" method="get">
         <label><strong>Your article title</strong></label><br>
         <input type="text" name="title" value=""><br>
         <label><strong>Please write your article</strong></label><br>
         <textarea id="article-text" name="article-text-area"></textarea>
         <input type="hidden" name="currentDate" value="">
-        <!--<input type="hidden" name="userID" value="1">-->
         <input type="hidden" name="imageFileName" value="">
 
     </form>
@@ -344,6 +348,12 @@
         content.value = view.innerHTML;
 
         document.getElementById('articleForm').submit();
+    })
+
+    const logoutLink = document.getElementsByClassName('logout')[0];
+    const logoutForm = document.getElementsByClassName('logoutForm')[0];
+    logoutLink.addEventListener('click', function () {
+        logoutForm.submit();
     })
 </script>
 </html>
