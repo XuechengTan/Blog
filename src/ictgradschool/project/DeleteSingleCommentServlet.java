@@ -12,8 +12,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "EditArticleButtonServlet", urlPatterns = {"/editarticlebuttonservlet"})
-public class EditArticleButtonServlet extends HttpServlet {
+//This class is used for a user to delete any comments under their article.
+
+@WebServlet(name = "DeleteSingleCommentServlet", urlPatterns = {"/deleteSingleCommentServlet"})
+public class DeleteSingleCommentServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
@@ -23,15 +26,17 @@ public class EditArticleButtonServlet extends HttpServlet {
                 return;
             }
 
-            int articleId = Integer.parseInt(req.getParameter("articleId"));
+            String content=  req.getParameter("comment");
+            boolean delete = CommentDAO.deleteCommentByContent(content,conn);
 
-            Article article = ArticleDAO.getArticleByArticleId(articleId, conn);
-            req.getSession().setAttribute("articleToModify", article);
-            req.setAttribute("modifyContent",article.getContent());
-            req.setAttribute("title",article.getTitle());
+            if (delete) {
+                System.out.println("Comment deleted");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/myarticleservlet");
+                dispatcher.forward(req, resp);
+            } else {
+                System.out.println("Fail");
+            }
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editArticlePage.jsp");
-            dispatcher.forward(req, resp);
         } catch (SQLException e) {
             resp.setStatus(500);
             e.printStackTrace();

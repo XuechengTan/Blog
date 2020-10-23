@@ -61,7 +61,7 @@
             flex-direction: column;
         }
 
-        .comment.deleteButton {
+        .commentDeleteButton {
             width: 4rem;
             height: 2rem;
             border: 1px solid;
@@ -73,7 +73,7 @@
             margin-right: 2rem;
         }
 
-        .comment.deleteButton:hover {
+        .commentDeleteButton:hover {
             background-color: coral;
             cursor: pointer;
         }
@@ -118,7 +118,11 @@
 
 
     </style>
-
+    <script>
+        function toMyArticleServlet() {
+            location.href = '/myarticleservlet';
+        }
+    </script>
 </head>
 
 <body>
@@ -129,7 +133,7 @@
         <a href="index.jsp">Home</a>
         <a href="ArticleCreatePart.html">Add New Article</a>
         <a href="Profile.jsp">Profile</a>
-        <a href="myArticle.jsp">My Articles</a>
+        <a href="javascript:void(0);" onclick="toMyArticleServlet()">My Articles</a>
         <a class="logout">Logout</a>
     </div>
 </div>
@@ -167,7 +171,14 @@
                         <div class="commentDeleteAndDate">
                             <p class="singleComment">created by ${comment.userId} at <fmt:formatDate
                                     value="${comment.date}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-                            <input class="comment deleteButton" type="button" value="Delete">
+
+                            <form class="deleteComment${comment.comment}" method="get"
+                                  action="/deleteSingleCommentServlet">
+                                <input type="hidden" name="comment" value="${comment.comment}">
+                            </form>
+
+                            <input class="commentDeleteButton" type="button" data-comment="${comment.comment}"
+                                   value="Delete">
                         </div>
                     </c:if>
                 </c:forEach>
@@ -191,21 +202,10 @@
 
 </div>
 
-<div class="testButtonDiv">
-    <form class="testButtonForm" action="/myarticleservlet" method="get">
-
-    </form>
-    <input id="testButton" type="button" value="test display the user articles">
-</div>
 
 </body>
 <script>
 
-    const button = document.getElementById("testButton");
-    const form = document.getElementsByClassName("testButtonForm")[0];
-    button.addEventListener('click', function () {
-        form.submit();
-    })
 
     const editButton = document.querySelectorAll(".editButton");
     for (let i = 0; i < editButton.length; i++) {
@@ -231,6 +231,17 @@
         });
     }
 
+    const deleteCommentButtons = document.getElementsByClassName("commentDeleteButton");
+    for (let i = 0; i < deleteCommentButtons.length; i++) {
+        let button = deleteCommentButtons[i];
+
+        button.addEventListener('click', function () {
+            let comment = this.dataset.comment;
+            let deleteCommentForm = document.getElementsByClassName("deleteComment" + comment)[0];
+            deleteCommentForm.submit();
+        })
+
+    }
 
     const showButtons = document.getElementsByClassName("showButton");
     let p = document.querySelectorAll(".con .short");
