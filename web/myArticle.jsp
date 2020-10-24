@@ -122,6 +122,9 @@
         function toMyArticleServlet() {
             location.href = '/myarticleservlet';
         }
+        function toLogout() {
+            location.href = '/logout';
+        }
     </script>
 </head>
 
@@ -134,7 +137,7 @@
         <a href="ArticleCreatePart.html">Add New Article</a>
         <a href="Profile.jsp">Profile</a>
         <a href="javascript:void(0);" onclick="toMyArticleServlet()">My Articles</a>
-        <a class="logout">Logout</a>
+        <a href="javascript:void(0)" onclick="toLogout()">Logout</a>
     </div>
 </div>
 
@@ -142,9 +145,7 @@
 
 <div id="content-wrapper">
 
-    <form class="logoutForm" action="/logout" method="get">
 
-    </form>
 
 
     <c:forEach var="article" items="${Articles}">
@@ -172,12 +173,12 @@
                             <p class="singleComment">created by ${comment.userId} at <fmt:formatDate
                                     value="${comment.date}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></p>
 
-                            <form class="deleteComment${comment.comment}" method="get"
+                            <form class="deleteComment${comment.commentId}" method="get"
                                   action="/deleteSingleCommentServlet">
-                                <input type="hidden" name="comment" value="${comment.comment}">
+                                <input type="hidden" name="commentId" value="${comment.commentId}">
                             </form>
 
-                            <input class="commentDeleteButton" type="button" data-comment="${comment.comment}"
+                            <input class="commentDeleteButton" type="button" data-commentid="${comment.commentId}"
                                    value="Delete">
                         </div>
                     </c:if>
@@ -236,8 +237,8 @@
         let button = deleteCommentButtons[i];
 
         button.addEventListener('click', function () {
-            let comment = this.dataset.comment;
-            let deleteCommentForm = document.getElementsByClassName("deleteComment" + comment)[0];
+            let commentId = this.dataset.commentid;
+            let deleteCommentForm = document.getElementsByClassName("deleteComment" + commentId)[0];
             deleteCommentForm.submit();
         })
 
@@ -260,11 +261,7 @@
         }
     }
 
-    const logoutLink = document.getElementsByClassName('logout')[0];
-    const logoutForm = document.getElementsByClassName('logoutForm')[0];
-    logoutLink.addEventListener('click', function () {
-        logoutForm.submit();
-    })
+
 
 
 </script>

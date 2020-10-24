@@ -26,8 +26,8 @@ public class DeleteSingleCommentServlet extends HttpServlet {
                 return;
             }
 
-            String content=  req.getParameter("comment");
-            boolean delete = CommentDAO.deleteCommentByContent(content,conn);
+            String commentId=  req.getParameter("commentId");
+            boolean delete = CommentDAO.deleteCommentByCommentId(commentId,conn);
 
             if (delete) {
                 System.out.println("Comment deleted");
