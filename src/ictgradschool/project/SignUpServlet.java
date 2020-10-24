@@ -123,7 +123,7 @@ public class SignUpServlet extends HttpServlet {
                 throw new ServletException(e);
             }
 //        req.getSession().setAttribute("user", newUser);
-        // Redirect to the main articles page.
+        // Redirect to the main login page.
         resp.sendRedirect("./Login.html");
     }
 
