@@ -6,49 +6,8 @@
     <link href ="Style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
     <script src="ReplaceLoginButtons.js"></script>
+    <script src="checkInput.js"></script>
     <style>textarea {resize: none;}</style>
-    <script>
-
-        //This function is used for testing if the two passwords are the same.
-        function testPassword() {
-            let password = document.getElementById("passwordForm");
-            let passwordValue = password.password.value;
-            let passwordRepeatValue = password.rePassword.value;
-            if (!(passwordValue === passwordRepeatValue)) {
-                alert("Please check your password, cause two passwords are different");
-                return false;
-            }
-        }
-
-        //A function to test if the userName is valid.
-        function testUserName() {
-
-            let userName = document.getElementById("userName");
-            // send the username value to servlet and check with existing username and return pass or fail
-            fetch(`/usernames?username=${userName.value}`,{
-                method:"GET"})
-            .then(function (res){
-                return res.json();})
-                .then(function (text){
-                    if(text == "fail"){
-                        alert("Username "+userName.value +" is already taken!");
-                    }
-                })
-                .catch(function (res){console.log(res)})
-        }
-
-        function emptyValidation(inputTxt) {
-            if (inputTxt.value.length == 0)
-            {
-                document.inputTxt.style.background =   'Yellow';
-            }
-            else
-            {
-                document.inputTxt.style.background = 'White';
-            }
-            return error;
-        }
-    </script>
 
 </head>
 <body>
@@ -57,7 +16,7 @@
     <h1>The Pokemon Blog</h1>
     <div id="nav">
         <a href="UserSignup.html">Create Account</a>
-        <a>Login</a>
+        <a href="Login.html">Login</a>
     </div>
 </div>
 
@@ -67,19 +26,19 @@
 
     <form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="" id="passwordForm">
         <label>Choose username:</label><br>
-        <input type="text" name="userName" id="userName" value="" onblur="testUserName()"><br><br>
+        <input type="text" name="userName" id="userName" value="" onblur="testUserName()" required/><br><br>
         <label>Choose password:</label><br>
-        <input type="password" name="password" value="" ><br><br>
+        <input type="password" name="password" value="" required/><br><br>
         <label>Re-enter password:</label><br>
-        <input type="password" name="rePassword" value="" onblur="return testPassword()"><br><br>
+        <input type="password" name="rePassword" value="" onblur="return testPassword()" required/><br><br>
         <label>Enter your first name:</label><br>
-        <input type="text" name ="firstName" value=""><br><br>
+        <input type="text" name ="firstName" value="" required/><br><br>
         <label>Enter your surname:</label><br>
-        <input type="text" name="lastName" value=""><br><br>
+        <input type="text" name="lastName" value="" required/><br><br>
         <label>Enter your date of birth:</label><br>
-        <input type="date" name="dateOfBirth" value=""><br><br>
+        <input type="date" name="dateOfBirth" value="" required/><br><br>
         <label>Enter a brief description of yourself:</label><br>
-        <textarea name="description" value="" rows="3" cols="50"></textarea><br><br>
+        <textarea name="description" value="" rows="3" cols="50" required></textarea><br><br>
 
         <label>Choose a profile image:</label><br>
         <input type="radio" id="avatar1" name="avatar" value="avatar1.jpg">
@@ -90,6 +49,8 @@
         <img src="images/avatar3.jpg"><br>
         <input type="radio" id="avatar4" name="avatar" value="avatar4.jpg">
         <img src="images/avatar4.jpg"><br><br>
+        <input type="radio" id="avatar" name="avatar" value="custom">
+        <div id="custom-image"></div>
         <label>Or upload a custom profile image: </label><br>
         <input type="file" id="custom-avatar" name="custom-avatar" value="" accept="image/*">
 

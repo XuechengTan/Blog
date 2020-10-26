@@ -89,10 +89,9 @@ public class SignUpServlet extends HttpServlet {
                         break;
 
                         case "dateOfBirth":
-                            System.out.println(fi.getString());
-                            Date dob = new SimpleDateFormat("yyyy-MM-dd").parse(fi.getString());
-                            newUser.setDob(dob);
-                            break;
+                        Date dob = new SimpleDateFormat("yyyy-MM-dd").parse(fi.getString());
+                        newUser.setDob(dob);
+                        break;
 
                         case "description":
                         newUser.setDescription(fi.getString());
@@ -100,17 +99,20 @@ public class SignUpServlet extends HttpServlet {
 
                         case "avatar":
                             if(fi.getString()!=null) {
+                                System.out.println("ava = "+fi.getName());
                                 newUser.setImagePath(fi.getString());
                                 continue;
-                            }else break;
+                            }
+                            break;
 
                         case "custom-avatar":
-                            if(fi.getName()!=null) {
+                            if(fi.getName()!="") {
                                 File imageFile2 = new File(this.uploadsFolder, fi.getName());
                                 newUser.setImagePath(fi.getName());
                                 fi.write(imageFile2);
-                                break;
+
                             }
+                            break;
                     }
                 }
 
@@ -122,7 +124,7 @@ public class SignUpServlet extends HttpServlet {
             } catch (Exception e) {
                 throw new ServletException(e);
             }
-//        req.getSession().setAttribute("user", newUser);
+            req.getSession().setAttribute("user", newUser);
         // Redirect to the main login page.
         resp.sendRedirect("./Login.html");
     }
