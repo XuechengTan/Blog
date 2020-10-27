@@ -125,7 +125,7 @@
         <a href="index.jsp">Home</a>
         <a href="ArticleCreatePart.html">Add New Article</a>
         <a>Profile</a>
-        <a href="myArticle.jsp">My Articles</a>
+        <a href="javascript:void(0);" onclick="toMyArticleServlet()">My Articles</a>
         <a class="logout">Logout</a>
     </div>
 </div>
@@ -313,6 +313,12 @@
 </div>
 </body>
 <script>
+
+    function toMyArticleServlet() {
+        location.href = '/myarticleservlet';
+    }
+
+
     const editor = document.getElementsByClassName('editor')[0];
     const toolbar = editor.getElementsByClassName('toolbar')[0];
     const buttons = toolbar.querySelectorAll('.btn:not(.has-submenu)');
@@ -355,5 +361,7 @@
     logoutLink.addEventListener('click', function () {
         logoutForm.submit();
     })
+
+
 </script>
 </html>

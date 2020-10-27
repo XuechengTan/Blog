@@ -17,12 +17,18 @@ public class DeleteArticleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+
+            if (req.getSession().getAttribute("loginUser")==null){
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                return;
+            }
+
             int articleId = Integer.parseInt(req.getParameter("articleId"));
             boolean delete = ArticleDAO.deleteArticle(articleId, conn);
 
             if (delete) {
                 System.out.println("article deleted");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/myArticle.jsp");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/myarticleservlet");
                 dispatcher.forward(req, resp);
             } else {
                 System.out.println("article delete failed");

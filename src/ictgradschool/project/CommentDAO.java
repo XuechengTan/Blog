@@ -79,6 +79,57 @@ public class CommentDAO {
 
         }
     }
+    public static boolean deleteCommentByCommentId(String contentId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_comments WHERE commentId=?")) {
+            stmt.setString(1, contentId);
+
+
+
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+    public static boolean deleteCommentByContent(String content, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_comments WHERE content=?")) {
+            stmt.setString(1, content);
+
+
+
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+    public static boolean deleteCommentByArticleIdAndUserId(int articleId,int userId, Connection conn) throws SQLException {
+
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "DELETE FROM pb_comments WHERE userId=?, articleId = ?")) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, articleId);
+
+
+
+            int rowsAffected = stmt.executeUpdate();
+
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
 
     private static Comment createCommentFromResultSet(ResultSet rs) throws SQLException {
 
