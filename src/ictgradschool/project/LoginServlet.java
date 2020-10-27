@@ -29,13 +29,11 @@ public class LoginServlet extends HttpServlet {
             String hash = PasswordUtil.base64Encode(hashGenerated);
 
             for (int i = 0; i < users.size(); i++) {
-                System.out.println(users.get(i).getUserName());
+
                 if (name.equals(users.get(i).getUserName())) {
 
                     if (hash.equals(users.get(i).getPasswordHashBase64())) {
                         request.setAttribute("name", name);
-
-                        System.out.println("before session attribute");
 
                         request.getSession().setAttribute("loginUser", users.get(i));
 

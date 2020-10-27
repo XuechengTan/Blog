@@ -61,7 +61,7 @@
             flex-direction: column;
         }
 
-        .comment.deleteButton {
+        .commentDeleteButton {
             width: 4rem;
             height: 2rem;
             border: 1px solid;
@@ -73,7 +73,7 @@
             margin-right: 2rem;
         }
 
-        .comment.deleteButton:hover {
+        .commentDeleteButton:hover {
             background-color: coral;
             cursor: pointer;
         }
@@ -118,7 +118,14 @@
 
 
     </style>
-
+    <script>
+        function toMyArticleServlet() {
+            location.href = '/myarticleservlet';
+        }
+        function toLogout() {
+            location.href = '/logout';
+        }
+    </script>
 </head>
 
 <body>
@@ -129,8 +136,8 @@
         <a href="index.jsp">Home</a>
         <a href="ArticleCreatePart.html">Add New Article</a>
         <a href="Profile.jsp">Profile</a>
-        <a href="myArticle.jsp">My Articles</a>
-        <a class="logout">Logout</a>
+        <a href="javascript:void(0);" onclick="toMyArticleServlet()">My Articles</a>
+        <a href="javascript:void(0)" onclick="toLogout()">Logout</a>
     </div>
 </div>
 
@@ -138,9 +145,7 @@
 
 <div id="content-wrapper">
 
-    <form class="logoutForm" action="/logout" method="get">
 
-    </form>
 
 
     <c:forEach var="article" items="${Articles}">
@@ -167,7 +172,14 @@
                         <div class="commentDeleteAndDate">
                             <p class="singleComment">created by ${comment.userId} at <fmt:formatDate
                                     value="${comment.date}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-                            <input class="comment deleteButton" type="button" value="Delete">
+
+                            <form class="deleteComment${comment.commentId}" method="get"
+                                  action="/deleteSingleCommentServlet">
+                                <input type="hidden" name="commentId" value="${comment.commentId}">
+                            </form>
+
+                            <input class="commentDeleteButton" type="button" data-commentid="${comment.commentId}"
+                                   value="Delete">
                         </div>
                     </c:if>
                 </c:forEach>
@@ -191,21 +203,10 @@
 
 </div>
 
-<div class="testButtonDiv">
-    <form class="testButtonForm" action="/myarticleservlet" method="get">
-
-    </form>
-    <input id="testButton" type="button" value="test display the user articles">
-</div>
 
 </body>
 <script>
 
-    const button = document.getElementById("testButton");
-    const form = document.getElementsByClassName("testButtonForm")[0];
-    button.addEventListener('click', function () {
-        form.submit();
-    })
 
     const editButton = document.querySelectorAll(".editButton");
     for (let i = 0; i < editButton.length; i++) {
@@ -231,6 +232,17 @@
         });
     }
 
+    const deleteCommentButtons = document.getElementsByClassName("commentDeleteButton");
+    for (let i = 0; i < deleteCommentButtons.length; i++) {
+        let button = deleteCommentButtons[i];
+
+        button.addEventListener('click', function () {
+            let commentId = this.dataset.commentid;
+            let deleteCommentForm = document.getElementsByClassName("deleteComment" + commentId)[0];
+            deleteCommentForm.submit();
+        })
+
+    }
 
     const showButtons = document.getElementsByClassName("showButton");
     let p = document.querySelectorAll(".con .short");
@@ -249,11 +261,7 @@
         }
     }
 
-    const logoutLink = document.getElementsByClassName('logout')[0];
-    const logoutForm = document.getElementsByClassName('logoutForm')[0];
-    logoutLink.addEventListener('click', function () {
-        logoutForm.submit();
-    })
+
 
 
 </script>

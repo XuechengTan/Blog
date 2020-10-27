@@ -18,9 +18,13 @@ public class EditArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
+            if (req.getSession().getAttribute("loginUser") == null) {
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                return;
+            }
 
-            Object articleObject=req.getSession().getAttribute("articleToModify");
-            Article article=(Article)articleObject;
+            Object articleObject = req.getSession().getAttribute("articleToModify");
+            Article article = (Article) articleObject;
 
 
             String title = req.getParameter("title");
@@ -50,6 +54,6 @@ public class EditArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        doGet(req, resp);
     }
 }

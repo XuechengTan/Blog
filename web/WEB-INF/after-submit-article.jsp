@@ -7,6 +7,11 @@
     <title>The Pokemon Blog</title>
     <link href ="Style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
+    <script>
+        function toMyArticleServlet() {
+            location.href = '/myarticleservlet';
+        }
+    </script>
 </head>
 <body>
 
@@ -26,7 +31,7 @@
 <div id="content-wrapper">
     <p><strong>The article has been added to the blog successfully!</strong></p>
     <a href="./index.jsp">Click here to return home page</a><br>
-    <a href="./myArticle.jsp">Click here to see all your articles </a>
+    <a href="javascript:void(0);" onclick="toMyArticleServlet()">Click here to see all your articles </a>
 
 </div>
 
