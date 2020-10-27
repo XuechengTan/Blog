@@ -72,7 +72,7 @@ public class SignUpServlet extends HttpServlet {
                         String password = fi.getString();
 
                         byte[] saltGenerated = PasswordUtil.getNextSalt();
-                        byte[] hashGenerated = PasswordUtil.insecureHash(password);
+                        byte[] hashGenerated = PasswordUtil.hash(password.toCharArray(), saltGenerated);
 
                         String salt = PasswordUtil.base64Encode(saltGenerated);
                         newUser.setSaltBase64(salt);

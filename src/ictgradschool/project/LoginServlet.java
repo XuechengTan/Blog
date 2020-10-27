@@ -25,16 +25,15 @@ public class LoginServlet extends HttpServlet {
 
             String name = request.getParameter("name");
             String password = request.getParameter("password");
-            byte[] hashGenerated = PasswordUtil.insecureHash(password);
-            String hash = PasswordUtil.base64Encode(hashGenerated);
 
             for (int i = 0; i < users.size(); i++) {
 
                 if (name.equals(users.get(i).getUserName())) {
+                    byte[] salt = PasswordUtil.base64Decode(users.get(i).getSaltBase64());
+                    byte[] expectedHash = PasswordUtil.base64Decode(users.get(i).getPasswordHashBase64());
 
-                    if (hash.equals(users.get(i).getPasswordHashBase64())) {
+                    if (PasswordUtil.isExpectedPassword(password.toCharArray(), salt, expectedHash)) {
                         request.setAttribute("name", name);
-
                         request.getSession().setAttribute("loginUser", users.get(i));
 
                         request.getRequestDispatcher("ArticleCreatePart.html").forward(request, response);
