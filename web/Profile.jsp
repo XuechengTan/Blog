@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
     <script src="ReplaceLoginButtons.js"></script>
 <style>
-    .editButton {
+    .button {
         width: 4rem;
         height: 2rem;
         border: 1px solid;
@@ -25,28 +25,10 @@
         border-radius: 5px;
         margin-left: 2rem;
     }
-
-    .deleteButton {
-        width: 4rem;
-        height: 2rem;
-        border: 1px solid;
-        background: orange;
-        color: #FFF;
-        box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
-        border-radius: 5px;
-        margin-left: 2rem;
-    }
-
-    .deleteButton:hover {
+    .button:hover {
         background-color: coral;
         cursor: pointer;
     }
-
-    .editButton:hover {
-        background-color: coral;
-        cursor: pointer;
-    }
-
     .buttonDiv {
         display: flex;
     }
@@ -81,10 +63,9 @@
                 <p>${loginUser.description}</p>
             </div>
             <div class="buttonDiv">
-                <input class="editButton" type="submit" value="Edit" onclick="location.href = '/profile-edit.jsp';">
-
-                <input class="deleteButton" type="button" value="Delete" onclick="location.href = '/deleteProfileServlet';">
-
+                <input class="button" type="submit" value="Edit" onclick="location.href = '/profile-edit.jsp';">
+                <input class="button" type="button" value="Change Password" onclick="location.href = '/profile-change-password.jsp';">
+                <input class="button" type="button" value="Delete" onclick="location.href = '/deleteProfileServlet';">
             </div>
         </div>
     </body>

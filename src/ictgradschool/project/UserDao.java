@@ -127,11 +127,11 @@ public class UserDao {
 
     }
 
-    public static boolean editArticle(User user, Connection conn) throws SQLException {
+    public static boolean editUser(User user, Connection conn) throws SQLException {
 
        // username, fname, lname, dob, passHashBase64, saltBase64, description, imageFilename
         try (PreparedStatement stmt = conn.prepareStatement(
-                "UPDATE pb_user SET username = ?, fname = ?, lname = ?, dob = ? description = ?, imageFilename =? WHERE articleId = ?")) {
+                "UPDATE pb_user SET username = ?, fname = ?, lname = ?, dob = ?, description = ?, imageFilename =? WHERE userId = ?")) {
 
 
             stmt.setString(1, user.getUserName());
@@ -140,9 +140,30 @@ public class UserDao {
             stmt.setDate(4, new java.sql.Date(user.getDob().getTime()));
             stmt.setString(5,user.getDescription());
             stmt.setString(6,user.getImagePath());
+            stmt.setInt(7, user.getUserId());
+
 
             int rowsAffected = stmt.executeUpdate();
 
+
+            return (rowsAffected == 1);
+
+        }
+
+    }
+
+    public static boolean editPassword(User user, Connection conn) throws SQLException {
+
+        // saltBase64, description,
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "UPDATE pb_user SET passHashBase64 = ?, saltBase64 = ? WHERE userId = ?")) {
+
+
+            stmt.setString(1, user.getPasswordHashBase64());
+            stmt.setString(2, user.getSaltBase64());
+            stmt.setInt(3, user.getUserId());
+
+            int rowsAffected = stmt.executeUpdate();
 
             return (rowsAffected == 1);
 

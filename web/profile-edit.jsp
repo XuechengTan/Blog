@@ -12,6 +12,7 @@
     <link href ="Style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&display=swap" rel="stylesheet">
     <script src="ReplaceLoginButtons.js"></script>
+    <script src="checkInput.js"></script>
 
 </head>
 <body>
@@ -26,41 +27,31 @@
     </div>
 </div>
 <div id="content-wrapper">
-    <h1>${loginUser.userName}'s Profile</h1>
+    <h1>Edit Profile</h1>
+
+<form action="./editProfile" method="post" enctype="multipart/form-data" onsubmit="return testPassword()" id="passwordForm">
+    <label>Enter new username:</label><br>
+    <input type="text" name="userName" id="userName" value="${loginUser.userName}" onblur="testUserName()"><br><br>
+
+<%--    <label>Choose password:</label><br>--%>
+<%--    <input type="password" name="password" value=""><br><br>--%>
+<%--    <label>Re-enter password:</label><br>--%>
+<%--    <input type="password" name="rePassword" value=""><br><br>--%>
+
+    <label>Enter new first name:</label><br>
+    <input type="text" name ="firstName" value="${loginUser.fName}"><br><br>
+    <label>Enter new surname:</label><br>
+    <input type="text" name="lastName" value="${loginUser.lName}"><br><br>
+    <label>Enter new date of birth:</label><br>
+    <input type="date" name="dateOfBirth" value="${loginUser.dob}"><br><br>
+    <label>Enter new description of yourself:</label><br><br>
+    <textarea name="description" value="" rows="3" cols="50">${loginUser.description}</textarea><br><br>
 
     <div id="profileImage">
+        <h4>Current profile image:</h4>
         <img src="./images/${loginUser.imagePath}">
-    </div>
-    <div id="userDetail">
-        <ul>
-            <li>Username: ${loginUser.userName}</li>
-            <li>First name: ${loginUser.fName}</li>
-            <li>Last name: ${loginUser.lName}</li>
-            <li>Date of birth: ${loginUser.dob}</li>
-        </ul>
-        <h3>Description</h3>
-        <p>${loginUser.description}</p>
-    </div>
-
-
-
-<form action="./signUp" method="post" enctype="multipart/form-data" onsubmit="return testPassword()" id="passwordForm">
-    <label>Choose username:</label><br>
-    <input type="text" name="userName" id="userName" value="${loginUser.userName}" onblur="testUserName()"><br><br>
-    <label>Choose password:</label><br>
-    <input type="password" name="password" value=""><br><br>
-    <label>Re-enter password:</label><br>
-    <input type="password" name="rePassword" value=""><br><br>
-    <label>Enter your first name:</label><br>
-    <input type="text" name ="firstName" value="${loginUser.fName}"><br><br>
-    <label>Enter your surname:</label><br>
-    <input type="text" name="lastName" value="${loginUser.lName}"><br><br>
-    <label>Enter your date of birth:</label><br>
-    <input type="date" name="dateOfBirth" value="${loginUser.dob}"><br><br>
-    <label>Enter a brief description of yourself:</label><br>
-    <textarea name="description" value="${loginUser.description}" rows="3" cols="50"></textarea><br><br>
-
-    <label>Choose a profile image:</label><br>
+    </div><br>
+    <label>Choose new profile image:</label><br>
     <input type="radio" id="avatar1" name="avatar" value="avatar1.jpg">
     <img src="images/avatar1.jpg"><br>
     <input type="radio" id="avatar2" name="avatar" value="avatar2.jpg">
